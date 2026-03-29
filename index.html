@@ -21,6 +21,9 @@
 </head>
 <body>
 
+  <!-- Fixed gradient overlay — morphs with scroll engine -->
+  <div class="bg-gradient" aria-hidden="true"></div>
+
   <!-- ===================== Navigation ===================== -->
   <nav class="nav" id="main-nav">
     <div class="nav__inner">
@@ -30,7 +33,7 @@
         <span class="nav__logo-badge">by ByteMyOps</span>
       </a>
       <div class="nav__links" id="nav-links">
-        <a href="#hero" class="nav__link nav__link--active">Home</a>
+        <a href="#hero" class="nav__link">Home</a>
         <a href="#transition" class="nav__link">Solution</a>
         <a href="#finops" class="nav__link">FinOps</a>
         <a href="details.html" class="nav__link">Details</a>
@@ -41,17 +44,53 @@
 
   <!-- ===================== Phase 1: GCP World — Hero ===================== -->
   <section class="section section--hero" id="hero" data-phase="gcp">
+    <!-- Background gradient orbs -->
+    <div class="hero__bg" aria-hidden="true">
+      <div class="hero__orb hero__orb--blue"></div>
+      <div class="hero__orb hero__orb--red"></div>
+      <div class="hero__orb hero__orb--yellow"></div>
+      <div class="hero__orb hero__orb--green"></div>
+    </div>
+
     <div class="container">
-      <div class="section__header text-left">
-        <span class="badge badge--gcp">The Problem</span>
-        <h1 class="section__title">
+      <div class="hero__content">
+        <span class="badge badge--gcp hero__badge">The Problem</span>
+        <h1 class="hero__title">
           Migrating from <span class="text-gcp-gradient">Google Cloud</span> shouldn't take 18 months.
         </h1>
-        <p class="section__subtitle text-left">
-          CloudShift uses AI to accelerate GCP-to-AWS migration planning from months to minutes —
-          then keeps your AWS costs optimized forever.
+        <p class="hero__subtitle">
+          CloudShift uses AI to accelerate GCP-to-AWS migration planning
+          from months to minutes — then keeps your AWS costs optimized forever.
         </p>
+
+        <!-- Key statistics -->
+        <div class="hero__stats">
+          <div class="hero__stat">
+            <div class="hero__stat-value">6–18</div>
+            <div class="hero__stat-label">Months typical migration</div>
+          </div>
+          <div class="hero__stat hero__stat--red">
+            <div class="hero__stat-value">$2M+</div>
+            <div class="hero__stat-label">Average consulting costs</div>
+          </div>
+          <div class="hero__stat hero__stat--green">
+            <div class="hero__stat-value">70%</div>
+            <div class="hero__stat-label">Time reduction with AI</div>
+          </div>
+        </div>
+
+        <!-- Call to action -->
+        <div class="hero__actions">
+          <a href="#transition" class="btn btn--primary btn--lg">Explore Our Solution ↓</a>
+          <a href="details.html" class="btn btn--outline btn--lg">Technical Details →</a>
+        </div>
       </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="hero__scroll-indicator" aria-hidden="true">
+      <span>Scroll to explore</span>
+      <div class="hero__scroll-arrow">↓</div>
     </div>
   </section>
 
