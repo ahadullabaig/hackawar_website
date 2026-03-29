@@ -1,6 +1,6 @@
 /* ================================================================
-   CloudShift — Main JavaScript
-   ByteMyOps | Hack 'A' War
+   RADCloud — Main JavaScript
+   Migration-Native FinOps | Hack 'A' War
    ================================================================ */
 
 // -------------------- Navigation Scroll Behavior --------------------
@@ -188,33 +188,34 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   if (!output || !cursor || !terminal) return;
 
   const lines = [
-    { type: 'comment', text: '# CloudShift Migration Runbook — Auto-Generated' },
-    { type: 'comment', text: '# Target: GCP → AWS  |  Confidence: 94.2%' },
+    { type: 'comment', text: '# RADCloud Migration Runbook — Auto-Generated' },
+    { type: 'comment', text: '# Mode: Parallel Migration + FinOps  |  Agents: 5 active' },
     { type: 'blank' },
-    { type: 'command', text: 'cloudshift scan --source gcp --project my-app-prod' },
-    { type: 'output', text: '  ✓ Scanning IAM policies...          23 roles found' },
-    { type: 'output', text: '  ✓ Scanning Compute Engine...         8 instances' },
-    { type: 'output', text: '  ✓ Scanning Cloud Storage...          12 buckets' },
-    { type: 'output', text: '  ✓ Scanning Cloud SQL...              3 databases' },
-    { type: 'output', text: '  ✓ Scanning VPC networks...           2 VPCs mapped' },
+    { type: 'command', text: 'radcloud discover --source gcp --project my-app-prod' },
+    { type: 'output', text: '  ✓ Discovery Agent: IAM policies...    23 roles found' },
+    { type: 'output', text: '  ✓ Discovery Agent: Compute Engine...  8 instances (40% util)' },
+    { type: 'output', text: '  ✓ Discovery Agent: Cloud Storage...   12 buckets' },
+    { type: 'output', text: '  ✓ Discovery Agent: Cloud SQL...       3 databases' },
+    { type: 'output', text: '  ✓ Discovery Agent: VPC networks...    2 VPCs mapped' },
     { type: 'blank' },
-    { type: 'command', text: 'cloudshift analyze --compatibility' },
-    { type: 'output', text: '  → Compute Engine  →  EC2          98% compatible' },
-    { type: 'output', text: '  → Cloud Storage   →  S3           99% compatible' },
-    { type: 'output', text: '  → Cloud SQL       →  RDS          95% compatible' },
-    { type: 'output', text: '  → Cloud Functions →  Lambda       92% compatible' },
+    { type: 'command', text: 'radcloud map --parallel-finops' },
+    { type: 'output', text: '  → Mapping Agent: Cloud Run  → Lambda     (right-sized)' },
+    { type: 'output', text: '  → Mapping Agent: Compute    → EC2        (RI strategy)' },
+    { type: 'output', text: '  → Mapping Agent: Cloud SQL  → RDS        (Reserved)' },
+    { type: 'output', text: '  → FinOps Intel:  Savings Plan pre-calculated: $350K/yr' },
+    { type: 'output', text: '  ⚠ Risk Agent:    1 incompatible service flagged (15%)' },
     { type: 'blank' },
-    { type: 'command', text: 'cloudshift generate --output terraform --format hcl' },
+    { type: 'command', text: 'radcloud generate --terraform --optimized' },
     { type: 'output', text: '  ✓ Generated main.tf              (142 resources)' },
-    { type: 'output', text: '  ✓ Generated variables.tf         (38 variables)' },
+    { type: 'output', text: '  ✓ Generated cost-strategy.tf     (RI + Savings Plans)' },
     { type: 'output', text: '  ✓ Generated migration-runbook.md (24 steps)' },
     { type: 'blank' },
-    { type: 'command', text: 'cloudshift deploy --strategy blue-green --dry-run' },
-    { type: 'output', text: '  ✓ Estimated downtime: < 4 minutes' },
-    { type: 'output', text: '  ✓ Projected savings: $2,924/mo (31%)' },
-    { type: 'output', text: '  ✓ Rollback plan: auto-configured' },
+    { type: 'command', text: 'radcloud deploy --day0-optimized --watchdog-enabled' },
+    { type: 'output', text: '  ✓ Day 0 optimization: all resources right-sized' },
+    { type: 'output', text: '  ✓ Projected savings: $350K per $1M billing' },
+    { type: 'output', text: '  ✓ Watchdog Agent: monitoring active (5 agents)' },
     { type: 'blank' },
-    { type: 'success', text: '  ★ Migration plan ready — run `cloudshift deploy --execute`' },
+    { type: 'success', text: '  ★ Fully optimized deployment ready — zero FinOps delay' },
   ];
 
   let hasTyped = false;
@@ -449,10 +450,10 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     new Chart(ctx, {
       type: 'line',
       data: {
-        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+        labels: ['Month 1', 'Month 2', 'Month 3', 'Month 4', 'Month 5', 'Month 6'],
         datasets: [
           {
-            label: 'GCP Baseline',
+            label: 'Traditional (Sequential)',
             data: [9430, 9430, 9430, 9430, 9430, 9430],
             borderColor: 'rgba(88,166,255,0.6)',
             borderWidth: 2,
@@ -464,8 +465,8 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             fill: false,
           },
           {
-            label: 'AWS + FinOps',
-            data: [7200, 6800, 6300, 5800, 5400, 5100],
+            label: 'RADCloud (Day 0)',
+            data: [6500, 6100, 5700, 5400, 5200, 5100],
             borderColor: '#3fb950',
             borderWidth: 2.5,
             pointRadius: 4,
@@ -558,7 +559,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         labels: ['Compute', 'Storage', 'Database', 'Networking'],
         datasets: [
           {
-            label: 'GCP (Before)',
+            label: 'Before (GCP)',
             data: [4280, 1850, 2340, 960],
             backgroundColor: 'rgba(88,166,255,0.7)',
             borderColor: '#58a6ff',
@@ -568,7 +569,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             categoryPercentage: 0.65,
           },
           {
-            label: 'AWS (After)',
+            label: 'RADCloud Optimized',
             data: [2950, 1280, 1690, 586],
             backgroundColor: 'rgba(63,185,80,0.7)',
             borderColor: '#3fb950',

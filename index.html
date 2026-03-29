@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CloudShift — GCP to AWS Migration Accelerator + FinOps Autopilot | ByteMyOps</title>
-  <meta name="description" content="CloudShift by ByteMyOps: An AI-powered tool that accelerates GCP-to-AWS migration planning from months to minutes, then keeps your AWS costs optimized with FinOps Autopilot. Built for Hack 'A' War.">
-  <meta name="keywords" content="GCP to AWS migration, FinOps, cloud optimization, AWS, ByteMyOps, Hack A War">
+  <title>RADCloud — Migration-Native FinOps | One Unified AI OS for Cloud Transition</title>
+  <meta name="description" content="RADCloud: An AI-powered platform that collapses cloud migration and FinOps into a single, parallel workflow. Migrate smarter, optimize from Day 0. Built for Hack 'A' War.">
+  <meta name="keywords" content="cloud migration, FinOps, GCP to AWS, AI optimization, RADCloud, Hack A War, Day 0 optimization">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="CloudShift — GCP to AWS Migration + FinOps Autopilot">
-  <meta property="og:description" content="AI-powered cloud migration accelerator and financial operations autopilot by ByteMyOps.">
+  <meta property="og:title" content="RADCloud — Migration-Native FinOps Platform">
+  <meta property="og:description" content="AI-powered parallel migration + FinOps optimization. Collapse the timeline. Optimize from Day 0.">
   <meta property="og:type" content="website">
   <meta name="theme-color" content="#0d1117">
 
@@ -21,9 +21,31 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
+  <link rel="icon" type="image/jpeg" href="img/image.png">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
+  <!-- ===================== Premium Loading Screen ===================== -->
+  <div class="loader-overlay" id="loader">
+    <div class="loader__particles">
+      <div class="loader__particle"></div>
+      <div class="loader__particle"></div>
+      <div class="loader__particle"></div>
+      <div class="loader__particle"></div>
+      <div class="loader__particle"></div>
+      <div class="loader__particle"></div>
+    </div>
+    <div class="loader__logo-wrap">
+      <div class="loader__glow"></div>
+      <img src="img/image.png" alt="RADCloud" class="loader__logo-img">
+      <div class="loader__ring loader__ring--1"></div>
+      <div class="loader__ring loader__ring--2"></div>
+      <div class="loader__ring loader__ring--3"></div>
+    </div>
+    <div class="loader__title">RADCloud</div>
+    <div class="loader__subtitle">Migration-Native FinOps</div>
+  </div>
 
   <!-- Fixed gradient overlay — morphs with scroll engine -->
   <div class="bg-gradient" aria-hidden="true"></div>
@@ -32,21 +54,21 @@
   <nav class="nav" id="main-nav">
     <div class="nav__inner">
       <a href="index.html" class="nav__logo" id="nav-logo">
-        <div class="nav__logo-icon" aria-hidden="true">C</div>
-        <span class="nav__logo-text">CloudShift</span>
-        <span class="nav__logo-badge">by ByteMyOps</span>
+        <img src="img/image.png" alt="RADCloud" style="width:36px;height:36px;border-radius:6px;object-fit:cover;">
+        <span class="nav__logo-text">RADCloud</span>
+        <span class="nav__logo-badge">Migration-Native FinOps</span>
       </a>
       <div class="nav__links" id="nav-links">
         <a href="#hero" class="nav__link">Home</a>
         <a href="#transition" class="nav__link">Solution</a>
         <a href="#finops" class="nav__link">FinOps</a>
-        <a href="details.html" class="nav__link">Details</a>
-        <a href="#aws-services" class="nav__cta">AWS Services →</a>
+        <a href="details.html" class="nav__link">Architecture</a>
+        <a href="#aws-services" class="nav__cta">Tech Stack →</a>
       </div>
     </div>
   </nav>
 
-  <!-- ===================== Phase 1: GCP World — Hero ===================== -->
+  <!-- ===================== Phase 1: The Problem — Hero ===================== -->
   <section class="section section--hero" id="hero" data-phase="gcp">
     <!-- Background gradient orbs -->
     <div class="hero__bg" aria-hidden="true">
@@ -60,11 +82,11 @@
       <div class="hero__content">
         <span class="badge badge--gcp hero__badge">The Problem</span>
         <h1 class="hero__title">
-          Migrating from <span class="text-gcp-gradient">Google Cloud</span> shouldn't take 18 months.
+          Cloud migration and FinOps are <span class="text-gcp-gradient">broken apart</span> — costing millions.
         </h1>
         <p class="hero__subtitle">
-          CloudShift uses AI to accelerate GCP-to-AWS migration planning
-          from months to minutes — then keeps your AWS costs optimized forever.
+          RADCloud collapses migration + FinOps into one parallel AI workflow.
+          Migrate smarter. Optimize from Day 0.
         </p>
 
         <!-- Key statistics -->
@@ -74,19 +96,19 @@
             <div class="hero__stat-label">Months typical migration</div>
           </div>
           <div class="hero__stat hero__stat--red">
-            <div class="hero__stat-value">$2M+</div>
-            <div class="hero__stat-label">Average consulting costs</div>
+            <div class="hero__stat-value">35%</div>
+            <div class="hero__stat-label">Cloud spend wasted post-migration</div>
           </div>
           <div class="hero__stat hero__stat--green">
-            <div class="hero__stat-value">70%</div>
-            <div class="hero__stat-label">Time reduction with AI</div>
+            <div class="hero__stat-value">$350K</div>
+            <div class="hero__stat-label">Lost per $1M AWS billing</div>
           </div>
         </div>
 
         <!-- Call to action -->
         <div class="hero__actions">
-          <a href="#transition" class="btn btn--primary btn--lg">Explore Our Solution ↓</a>
-          <a href="details.html" class="btn btn--outline btn--lg">Technical Details →</a>
+          <a href="details.html" class="btn btn--primary btn--lg">View Architecture →</a>
+          <a href="#transition" class="btn btn--outline btn--lg">See How It Works ↓</a>
         </div>
       </div>
     </div>
@@ -98,43 +120,43 @@
     </div>
   </section>
 
-  <!-- ===================== Phase 2: Transition Portal ===================== -->
+  <!-- ===================== Phase 2: The Solution — RADCloud ===================== -->
   <section class="section section--transition" id="transition" data-phase="transition">
     <div class="container">
 
       <!-- Section header -->
       <div class="section__header reveal">
         <span class="badge badge--aws">Our Solution</span>
-        <h2 class="section__title">Enter <span class="text-aws-gradient">CloudShift</span></h2>
-        <p class="section__subtitle">Your AI-powered bridge from Google Cloud to AWS.</p>
+        <h2 class="section__title">Enter <span class="text-aws-gradient">RADCloud</span></h2>
+        <p class="section__subtitle">Migration-Native FinOps — One Unified AI OS for the Entire Cloud Transition.</p>
       </div>
 
       <!-- Split-screen portal -->
       <div class="portal">
 
-        <!-- GCP World (fading out) -->
+        <!-- Traditional Approach (fading out) -->
         <div class="portal__side portal__side--gcp reveal reveal--left">
           <div class="portal__side-header">
-            <span class="portal__icon">☁️</span>
-            <h3 class="portal__side-title">GCP World</h3>
-            <span class="portal__tag portal__tag--old">Before</span>
+            <span class="portal__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+            <h3 class="portal__side-title">The Sequential Trap</h3>
+            <span class="portal__tag portal__tag--old">Traditional</span>
           </div>
           <ul class="portal__list">
             <li class="portal__item portal__item--pain">
-              <span class="portal__item-icon">✗</span>
-              <span>6-18 months manual migration</span>
+              <span class="portal__item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span>
+              <span>Migration takes 6–18 months blind</span>
             </li>
             <li class="portal__item portal__item--pain">
-              <span class="portal__item-icon">✗</span>
-              <span>$2M+ consulting fees</span>
+              <span class="portal__item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span>
+              <span>FinOps starts at Day 90 — too late</span>
             </li>
             <li class="portal__item portal__item--pain">
-              <span class="portal__item-icon">✗</span>
-              <span>Error-prone service mapping</span>
+              <span class="portal__item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span>
+              <span>Duplicates inefficiencies into new cloud</span>
             </li>
             <li class="portal__item portal__item--pain">
-              <span class="portal__item-icon">✗</span>
-              <span>No cost visibility post-migration</span>
+              <span class="portal__item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span>
+              <span>$300K–$350K wasted per $1M billing</span>
             </li>
           </ul>
         </div>
@@ -146,29 +168,29 @@
           <div class="portal__divider-label">→</div>
         </div>
 
-        <!-- AWS World (emerging) -->
+        <!-- RADCloud Approach (emerging) -->
         <div class="portal__side portal__side--aws reveal reveal--right reveal-delay-2">
           <div class="portal__side-header">
-            <span class="portal__icon">⚡</span>
-            <h3 class="portal__side-title">AWS World</h3>
-            <span class="portal__tag portal__tag--new">After</span>
+            <span class="portal__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>
+            <h3 class="portal__side-title">RADCloud Parallel</h3>
+            <span class="portal__tag portal__tag--new">Day 0</span>
           </div>
           <ul class="portal__list">
             <li class="portal__item portal__item--win">
-              <span class="portal__item-icon">✓</span>
-              <span>AI migration in minutes</span>
+              <span class="portal__item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <span>Migration + FinOps run in parallel</span>
             </li>
             <li class="portal__item portal__item--win">
-              <span class="portal__item-icon">✓</span>
-              <span>70% cost reduction</span>
+              <span class="portal__item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <span>Cost-optimized BEFORE deployment</span>
             </li>
             <li class="portal__item portal__item--win">
-              <span class="portal__item-icon">✓</span>
-              <span>Intelligent service mapping</span>
+              <span class="portal__item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <span>70% faster planning with AI agents</span>
             </li>
             <li class="portal__item portal__item--win">
-              <span class="portal__item-icon">✓</span>
-              <span>Continuous FinOps optimization</span>
+              <span class="portal__item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <span>Zero FinOps delay — savings from Day 0</span>
             </li>
           </ul>
         </div>
@@ -177,32 +199,32 @@
       <!-- Feature cards -->
       <div class="portal__features">
         <div class="portal__feature-card reveal reveal-delay-1">
-          <div class="portal__feature-icon">🔍</div>
-          <h4 class="portal__feature-title">AI-Powered Analysis</h4>
-          <p class="portal__feature-text">Scans your entire GCP infrastructure and creates a comprehensive migration blueprint automatically.</p>
+          <div class="portal__feature-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/><path d="M11 8v6M8 11h6"/></svg></div>
+          <h4 class="portal__feature-title">Multi-Agent AI System</h4>
+          <p class="portal__feature-text">5 specialized AI agents — Discovery, Mapping, Risk, FinOps Intel, and Watchdog — work together from Day 0.</p>
         </div>
         <div class="portal__feature-card reveal reveal-delay-2">
-          <div class="portal__feature-icon">🔄</div>
-          <h4 class="portal__feature-title">Smart Service Mapping</h4>
-          <p class="portal__feature-text">Maps every GCP service to its optimal AWS equivalent with compatibility scoring and gap analysis.</p>
+          <div class="portal__feature-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg></div>
+          <h4 class="portal__feature-title">Cross-Cloud Intelligence</h4>
+          <p class="portal__feature-text">AI-powered contextual reasoning translates cloud architectures — not just code conversion, but deep optimization.</p>
         </div>
         <div class="portal__feature-card reveal reveal-delay-3">
-          <div class="portal__feature-icon">💰</div>
-          <h4 class="portal__feature-title">Cost Optimization</h4>
-          <p class="portal__feature-text">Estimates migration costs, identifies savings opportunities, and runs continuous FinOps post-migration.</p>
+          <div class="portal__feature-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+          <h4 class="portal__feature-title">Day 0 FinOps</h4>
+          <p class="portal__feature-text">Pre-calculates Reserved Instances, Savings Plans, and right-sized compute before a single resource is deployed.</p>
         </div>
       </div>
 
     </div>
   </section>
 
-  <!-- ===================== Service Mapping ===================== -->
+  <!-- ===================== Cross-Cloud Intelligence Pipeline ===================== -->
   <section class="section section--mapping" id="service-mapping" data-phase="aws">
     <div class="container">
       <div class="section__header reveal">
-        <span class="badge badge--aws">Service Mapping</span>
-        <h2 class="section__title">Intelligent Service Mapping</h2>
-        <p class="section__subtitle">AI-powered mapping of every GCP service to its optimal AWS equivalent.</p>
+        <span class="badge badge--aws">Cross-Cloud Intelligence</span>
+        <h2 class="section__title">Intelligent Service Translation</h2>
+        <p class="section__subtitle">AI-powered contextual reasoning that understands architecture, usage patterns, and cost implications.</p>
       </div>
 
       <!-- Mapping grid -->
@@ -210,24 +232,24 @@
 
         <!-- Column headers -->
         <div class="mapping__col-header mapping__col-header--gcp reveal" style="transition-delay: 0s">
-          <span class="mapping__col-icon">☁️</span>
-          <span>Google Cloud</span>
+          <span class="mapping__col-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></svg></span>
+          <span>Source (GCP)</span>
         </div>
         <div class="mapping__col-header mapping__col-header--center reveal" style="transition-delay: 0.05s">
-          <span>Mapping</span>
+          <span>AI Translation</span>
         </div>
         <div class="mapping__col-header mapping__col-header--aws reveal" style="transition-delay: 0.1s">
-          <span class="mapping__col-icon">⚡</span>
-          <span>Amazon Web Services</span>
+          <span class="mapping__col-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>
+          <span>Optimized Target (AWS)</span>
         </div>
 
-        <!-- Row 1: Compute -->
+        <!-- Row 1: Serverless -->
         <div class="mapping__card mapping__card--gcp reveal reveal--left" data-map-id="compute-gcp" data-row="compute" style="transition-delay: 0s">
-          <div class="mapping__card-icon">🖥️</div>
+          <div class="mapping__card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg></div>
           <div class="mapping__card-body">
-            <span class="mapping__card-category">Compute</span>
-            <h4 class="mapping__card-name">Compute Engine</h4>
-            <p class="mapping__card-desc">Virtual machine instances for general workloads</p>
+            <span class="mapping__card-category">Serverless</span>
+            <h4 class="mapping__card-name">Cloud Run</h4>
+            <p class="mapping__card-desc">Running at ~40% utilization, tied to committed use discounts</p>
           </div>
         </div>
         <div class="mapping__connector reveal reveal--scale" data-map-id="compute-line" data-row="compute" style="transition-delay: 0.05s; --stagger: 0.05s">
@@ -237,24 +259,24 @@
               <animateMotion dur="2s" repeatCount="indefinite" path="M 0 10 L 80 10" />
             </circle>
           </svg>
-          <span class="mapping__connector-badge" data-tier="high">98%</span>
+          <span class="mapping__connector-badge" data-tier="high">AI</span>
         </div>
         <div class="mapping__card mapping__card--aws reveal reveal--right" data-map-id="compute-aws" data-row="compute" style="transition-delay: 0.1s">
-          <div class="mapping__card-icon">🖥️</div>
+          <div class="mapping__card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
           <div class="mapping__card-body">
-            <span class="mapping__card-category">Compute</span>
-            <h4 class="mapping__card-name">Amazon EC2</h4>
-            <p class="mapping__card-desc">Elastic compute cloud for scalable virtual servers</p>
+            <span class="mapping__card-category">Serverless</span>
+            <h4 class="mapping__card-name">AWS Lambda</h4>
+            <p class="mapping__card-desc">Right-sized compute with pre-calculated Savings Plans</p>
           </div>
         </div>
 
-        <!-- Row 2: Storage -->
+        <!-- Row 2: Compute -->
         <div class="mapping__card mapping__card--gcp reveal reveal--left" data-map-id="storage-gcp" data-row="storage" style="transition-delay: 0.12s">
-          <div class="mapping__card-icon">🗄️</div>
+          <div class="mapping__card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
           <div class="mapping__card-body">
-            <span class="mapping__card-category">Storage</span>
-            <h4 class="mapping__card-name">Cloud Storage</h4>
-            <p class="mapping__card-desc">Object storage for any amount of data</p>
+            <span class="mapping__card-category">Compute</span>
+            <h4 class="mapping__card-name">Compute Engine</h4>
+            <p class="mapping__card-desc">VM instances with over-provisioned resources</p>
           </div>
         </div>
         <div class="mapping__connector reveal reveal--scale" data-map-id="storage-line" data-row="storage" style="transition-delay: 0.17s; --stagger: 0.17s">
@@ -264,20 +286,20 @@
               <animateMotion dur="2.2s" repeatCount="indefinite" path="M 0 10 L 80 10" />
             </circle>
           </svg>
-          <span class="mapping__connector-badge" data-tier="high">99%</span>
+          <span class="mapping__connector-badge" data-tier="high">AI</span>
         </div>
         <div class="mapping__card mapping__card--aws reveal reveal--right" data-map-id="storage-aws" data-row="storage" style="transition-delay: 0.22s">
-          <div class="mapping__card-icon">🪣</div>
+          <div class="mapping__card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
           <div class="mapping__card-body">
-            <span class="mapping__card-category">Storage</span>
-            <h4 class="mapping__card-name">Amazon S3</h4>
-            <p class="mapping__card-desc">Simple storage service for object data at scale</p>
+            <span class="mapping__card-category">Compute</span>
+            <h4 class="mapping__card-name">Amazon EC2</h4>
+            <p class="mapping__card-desc">Right-sized instances with Reserved Instance strategy</p>
           </div>
         </div>
 
         <!-- Row 3: Database -->
         <div class="mapping__card mapping__card--gcp reveal reveal--left" data-map-id="db-gcp" data-row="db" style="transition-delay: 0.24s">
-          <div class="mapping__card-icon">🗃️</div>
+          <div class="mapping__card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></div>
           <div class="mapping__card-body">
             <span class="mapping__card-category">Database</span>
             <h4 class="mapping__card-name">Cloud SQL</h4>
@@ -291,24 +313,24 @@
               <animateMotion dur="2.4s" repeatCount="indefinite" path="M 0 10 L 80 10" />
             </circle>
           </svg>
-          <span class="mapping__connector-badge" data-tier="high">95%</span>
+          <span class="mapping__connector-badge" data-tier="high">AI</span>
         </div>
         <div class="mapping__card mapping__card--aws reveal reveal--right" data-map-id="db-aws" data-row="db" style="transition-delay: 0.34s">
-          <div class="mapping__card-icon">🗃️</div>
+          <div class="mapping__card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></div>
           <div class="mapping__card-body">
             <span class="mapping__card-category">Database</span>
             <h4 class="mapping__card-name">Amazon RDS</h4>
-            <p class="mapping__card-desc">Managed relational database with multi-AZ support</p>
+            <p class="mapping__card-desc">Managed relational database with multi-AZ and RI optimization</p>
           </div>
         </div>
 
-        <!-- Row 4: Serverless -->
+        <!-- Row 4: Storage -->
         <div class="mapping__card mapping__card--gcp reveal reveal--left" data-map-id="func-gcp" data-row="func" style="transition-delay: 0.36s">
-          <div class="mapping__card-icon">⚙️</div>
+          <div class="mapping__card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div>
           <div class="mapping__card-body">
-            <span class="mapping__card-category">Serverless</span>
-            <h4 class="mapping__card-name">Cloud Functions</h4>
-            <p class="mapping__card-desc">Event-driven serverless compute platform</p>
+            <span class="mapping__card-category">Storage</span>
+            <h4 class="mapping__card-name">Cloud Storage</h4>
+            <p class="mapping__card-desc">Object storage buckets with no lifecycle policies</p>
           </div>
         </div>
         <div class="mapping__connector reveal reveal--scale" data-map-id="func-line" data-row="func" style="transition-delay: 0.41s; --stagger: 0.41s">
@@ -318,24 +340,24 @@
               <animateMotion dur="1.8s" repeatCount="indefinite" path="M 0 10 L 80 10" />
             </circle>
           </svg>
-          <span class="mapping__connector-badge" data-tier="mid">92%</span>
+          <span class="mapping__connector-badge" data-tier="high">AI</span>
         </div>
         <div class="mapping__card mapping__card--aws reveal reveal--right" data-map-id="func-aws" data-row="func" style="transition-delay: 0.46s">
-          <div class="mapping__card-icon">⚙️</div>
+          <div class="mapping__card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div>
           <div class="mapping__card-body">
-            <span class="mapping__card-category">Serverless</span>
-            <h4 class="mapping__card-name">AWS Lambda</h4>
-            <p class="mapping__card-desc">Run code without provisioning servers</p>
+            <span class="mapping__card-category">Storage</span>
+            <h4 class="mapping__card-name">Amazon S3</h4>
+            <p class="mapping__card-desc">Intelligent tiering + lifecycle policies auto-configured</p>
           </div>
         </div>
 
         <!-- Row 5: Containers -->
         <div class="mapping__card mapping__card--gcp reveal reveal--left" data-map-id="k8s-gcp" data-row="k8s" style="transition-delay: 0.48s">
-          <div class="mapping__card-icon">📦</div>
+          <div class="mapping__card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3h7a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-7m0-18H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h7m0-18v18"/></svg></div>
           <div class="mapping__card-body">
             <span class="mapping__card-category">Containers</span>
             <h4 class="mapping__card-name">GKE</h4>
-            <p class="mapping__card-desc">Managed Kubernetes engine for containers</p>
+            <p class="mapping__card-desc">Managed Kubernetes with idle node overhead</p>
           </div>
         </div>
         <div class="mapping__connector reveal reveal--scale" data-map-id="k8s-line" data-row="k8s" style="transition-delay: 0.53s; --stagger: 0.53s">
@@ -345,24 +367,24 @@
               <animateMotion dur="2.1s" repeatCount="indefinite" path="M 0 10 L 80 10" />
             </circle>
           </svg>
-          <span class="mapping__connector-badge" data-tier="high">97%</span>
+          <span class="mapping__connector-badge" data-tier="high">AI</span>
         </div>
         <div class="mapping__card mapping__card--aws reveal reveal--right" data-map-id="k8s-aws" data-row="k8s" style="transition-delay: 0.58s">
-          <div class="mapping__card-icon">📦</div>
+          <div class="mapping__card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3h7a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-7m0-18H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h7m0-18v18"/></svg></div>
           <div class="mapping__card-body">
             <span class="mapping__card-category">Containers</span>
             <h4 class="mapping__card-name">Amazon EKS</h4>
-            <p class="mapping__card-desc">Elastic Kubernetes service for container orchestration</p>
+            <p class="mapping__card-desc">Right-sized nodes with Spot Instance integration</p>
           </div>
         </div>
 
         <!-- Row 6: AI / ML -->
         <div class="mapping__card mapping__card--gcp reveal reveal--left" data-map-id="ai-gcp" data-row="ai" style="transition-delay: 0.6s">
-          <div class="mapping__card-icon">🧠</div>
+          <div class="mapping__card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"/></svg></div>
           <div class="mapping__card-body">
             <span class="mapping__card-category">AI / ML</span>
             <h4 class="mapping__card-name">Vertex AI</h4>
-            <p class="mapping__card-desc">Unified ML platform for training & deployment</p>
+            <p class="mapping__card-desc">ML platform with expensive always-on endpoints</p>
           </div>
         </div>
         <div class="mapping__connector reveal reveal--scale" data-map-id="ai-line" data-row="ai" style="transition-delay: 0.65s; --stagger: 0.65s">
@@ -372,14 +394,14 @@
               <animateMotion dur="2.6s" repeatCount="indefinite" path="M 0 10 L 80 10" />
             </circle>
           </svg>
-          <span class="mapping__connector-badge" data-tier="low">88%</span>
+          <span class="mapping__connector-badge" data-tier="mid">AI</span>
         </div>
         <div class="mapping__card mapping__card--aws reveal reveal--right" data-map-id="ai-aws" data-row="ai" style="transition-delay: 0.7s">
-          <div class="mapping__card-icon">🧠</div>
+          <div class="mapping__card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"/></svg></div>
           <div class="mapping__card-body">
             <span class="mapping__card-category">AI / ML</span>
             <h4 class="mapping__card-name">Amazon SageMaker</h4>
-            <p class="mapping__card-desc">Build, train, and deploy ML models at scale</p>
+            <p class="mapping__card-desc">Serverless inference with auto-scaling, cost-optimized</p>
           </div>
         </div>
 
@@ -391,21 +413,21 @@
     <div class="container">
       <div class="section__header reveal">
         <span class="badge badge--aws">How It Works</span>
-        <h2 class="section__title">The Migration Pipeline</h2>
-        <p class="section__subtitle">Four steps from GCP architecture to AWS deployment.</p>
+        <h2 class="section__title">The RADCloud Pipeline</h2>
+        <p class="section__subtitle">Four parallel steps — migration + FinOps working together from Day 0.</p>
       </div>
 
       <div class="pipeline">
         <!-- Step 1 -->
         <div class="pipeline__step reveal" style="transition-delay: 0s">
           <div class="pipeline__step-number">01</div>
-          <div class="pipeline__step-icon">📥</div>
-          <h3 class="pipeline__step-title">Ingest</h3>
-          <p class="pipeline__step-desc">CloudShift scans your entire GCP infrastructure and maps every resource, dependency, and configuration.</p>
+          <div class="pipeline__step-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
+          <h3 class="pipeline__step-title">Discover</h3>
+          <p class="pipeline__step-desc">Discovery Agent scans your entire GCP infrastructure — configs, billing data, committed usage, and dependencies.</p>
           <ul class="pipeline__step-list">
-            <li>IAM policies & roles</li>
-            <li>Networking & VPCs</li>
-            <li>Compute & storage</li>
+            <li>GCP configurations</li>
+            <li>12 months billing data</li>
+            <li>Committed usage discounts</li>
           </ul>
         </div>
 
@@ -419,13 +441,13 @@
         <!-- Step 2 -->
         <div class="pipeline__step reveal" style="transition-delay: 0.15s">
           <div class="pipeline__step-number">02</div>
-          <div class="pipeline__step-icon">🔍</div>
-          <h3 class="pipeline__step-title">Analyze</h3>
-          <p class="pipeline__step-desc">AI-powered analysis identifies service equivalencies, compatibility gaps, and migration complexity.</p>
+          <div class="pipeline__step-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></div>
+          <h3 class="pipeline__step-title">Map + Analyze</h3>
+          <p class="pipeline__step-desc">Mapping Agent + FinOps Intel Agent work in parallel — mapping services while pre-calculating cost strategies.</p>
           <ul class="pipeline__step-list">
-            <li>Service compatibility</li>
-            <li>API equivalencies</li>
-            <li>Data format mapping</li>
+            <li>GCP → AWS service mapping</li>
+            <li>Incompatibility flagging (~15%)</li>
+            <li>Savings Plans pre-calculation</li>
           </ul>
         </div>
 
@@ -439,13 +461,13 @@
         <!-- Step 3 -->
         <div class="pipeline__step reveal" style="transition-delay: 0.3s">
           <div class="pipeline__step-number">03</div>
-          <div class="pipeline__step-icon">⚖️</div>
-          <h3 class="pipeline__step-title">Assess</h3>
-          <p class="pipeline__step-desc">Risk scoring produces a confidence-ranked migration plan with cost projections and rollback strategies.</p>
+          <div class="pipeline__step-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <h3 class="pipeline__step-title">Assess Risk</h3>
+          <p class="pipeline__step-desc">Risk Agent detects deployment risks, incompatibilities, and generates confidence-ranked migration plans.</p>
           <ul class="pipeline__step-list">
-            <li>Risk & confidence scores</li>
+            <li>Architecture risk detection</li>
             <li>Cost delta analysis</li>
-            <li>Rollback blueprints</li>
+            <li>Rollback strategy generation</li>
           </ul>
         </div>
 
@@ -459,56 +481,56 @@
         <!-- Step 4 -->
         <div class="pipeline__step reveal" style="transition-delay: 0.45s">
           <div class="pipeline__step-number">04</div>
-          <div class="pipeline__step-icon">🚀</div>
-          <h3 class="pipeline__step-title">Generate</h3>
-          <p class="pipeline__step-desc">Outputs production-ready IaC templates, migration scripts, and a FinOps monitoring dashboard.</p>
+          <div class="pipeline__step-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg></div>
+          <h3 class="pipeline__step-title">Generate + Deploy</h3>
+          <p class="pipeline__step-desc">Outputs deployment-ready Terraform, migration runbooks, and AWS cost optimization plans — fully optimized at cutover.</p>
           <ul class="pipeline__step-list">
-            <li>Terraform / CloudFormation</li>
+            <li>Terraform / IaC generation</li>
             <li>Migration runbooks</li>
-            <li>FinOps autopilot setup</li>
+            <li>Watchdog Agent monitoring</li>
           </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===================== Cost Comparison ===================== -->
+  <!-- ===================== ROI / Impact ===================== -->
   <section class="section section--cost" id="cost-comparison" data-phase="aws">
     <div class="container">
       <div class="section__header reveal">
-        <span class="badge badge--aws">Cost Analysis</span>
-        <h2 class="section__title">Migration Risk &amp; Cost Comparison</h2>
-        <p class="section__subtitle">Transparent cost estimation and risk assessment before you migrate.</p>
+        <span class="badge badge--aws">Impact & ROI</span>
+        <h2 class="section__title">Collapsing the Timeline — Real Results</h2>
+        <p class="section__subtitle">RADCloud eliminates the sequential model. Parallel execution delivers Day-0 optimized deployment.</p>
       </div>
 
       <!-- Cost comparison cards -->
       <div class="cost-compare">
         <div class="cost-card cost-card--gcp reveal reveal--left" style="transition-delay: 0s">
           <div class="cost-card__header">
-            <span class="cost-card__provider">☁️ Google Cloud</span>
-            <span class="cost-card__label">Current Spend</span>
+            <span class="cost-card__provider"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:4px"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> Traditional Approach</span>
+            <span class="cost-card__label">Sequential Model</span>
           </div>
           <div class="cost-card__rows">
             <div class="cost-card__row">
-              <span>Compute Engine</span>
-              <span class="cost-card__amount" data-target="4280">$0</span>
+              <span>Migration Phase</span>
+              <span class="cost-card__amount" data-target="12">0 months</span>
             </div>
             <div class="cost-card__row">
-              <span>Cloud Storage</span>
-              <span class="cost-card__amount" data-target="1850">$0</span>
+              <span>Wait for Optimization</span>
+              <span class="cost-card__amount" data-target="3">0 months</span>
             </div>
             <div class="cost-card__row">
-              <span>Cloud SQL</span>
-              <span class="cost-card__amount" data-target="2340">$0</span>
+              <span>FinOps Starts At</span>
+              <span class="cost-card__amount" data-target="90">Day 0</span>
             </div>
             <div class="cost-card__row">
-              <span>Networking</span>
-              <span class="cost-card__amount" data-target="960">$0</span>
+              <span>Wasted Cloud Spend</span>
+              <span class="cost-card__amount" data-target="35">0%</span>
             </div>
           </div>
           <div class="cost-card__total">
-            <span>Monthly Total</span>
-            <span class="cost-card__amount cost-card__amount--total" data-target="9430">$0</span>
+            <span>Per $1M AWS Billing Loss</span>
+            <span class="cost-card__amount cost-card__amount--total" data-target="350000">$0</span>
           </div>
         </div>
 
@@ -516,73 +538,73 @@
         <div class="cost-savings reveal reveal--scale" style="transition-delay: 0.15s">
           <div class="cost-savings__arrow">→</div>
           <div class="cost-savings__badge">
-            <span class="cost-savings__percent" data-target="31">0</span>
-            <span class="cost-savings__label">% savings</span>
+            <span class="cost-savings__percent" data-target="70">0</span>
+            <span class="cost-savings__label">% faster</span>
           </div>
-          <div class="cost-savings__sub">$2,924/mo saved</div>
+          <div class="cost-savings__sub">Day 0 Optimization</div>
         </div>
 
         <div class="cost-card cost-card--aws reveal reveal--right" style="transition-delay: 0.1s">
           <div class="cost-card__header">
-            <span class="cost-card__provider">⚡ Amazon Web Services</span>
-            <span class="cost-card__label">Projected Spend</span>
+            <span class="cost-card__provider"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:4px"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> RADCloud Approach</span>
+            <span class="cost-card__label">Parallel Model</span>
           </div>
           <div class="cost-card__rows">
             <div class="cost-card__row">
-              <span>Amazon EC2</span>
-              <span class="cost-card__amount" data-target="2950">$0</span>
+              <span>Migration + FinOps</span>
+              <span class="cost-card__amount" data-target="0">Parallel</span>
             </div>
             <div class="cost-card__row">
-              <span>Amazon S3</span>
-              <span class="cost-card__amount" data-target="1280">$0</span>
+              <span>Wait for Optimization</span>
+              <span class="cost-card__amount" data-target="0">0 days</span>
             </div>
             <div class="cost-card__row">
-              <span>Amazon RDS</span>
-              <span class="cost-card__amount" data-target="1690">$0</span>
+              <span>FinOps Starts At</span>
+              <span class="cost-card__amount" data-target="0">Day 0</span>
             </div>
             <div class="cost-card__row">
-              <span>Networking</span>
-              <span class="cost-card__amount" data-target="586">$0</span>
+              <span>Wasted Cloud Spend</span>
+              <span class="cost-card__amount" data-target="0">0%</span>
             </div>
           </div>
           <div class="cost-card__total">
-            <span>Monthly Total</span>
-            <span class="cost-card__amount cost-card__amount--total cost-card__amount--savings" data-target="6506">$0</span>
+            <span>Per $1M AWS Billing Saved</span>
+            <span class="cost-card__amount cost-card__amount--total cost-card__amount--savings" data-target="350000">$0</span>
           </div>
         </div>
       </div>
 
-      <!-- Risk assessment -->
+      <!-- ROI stat cards -->
       <div class="risk-grid">
         <div class="risk-card reveal" style="transition-delay: 0.2s">
-          <div class="risk-card__indicator risk-card__indicator--medium"></div>
-          <h4 class="risk-card__title">Migration Complexity</h4>
-          <span class="risk-card__value risk-card__value--medium">Medium</span>
-          <p class="risk-card__desc">6 services to migrate with 2 requiring manual configuration adjustments.</p>
+          <div class="risk-card__indicator risk-card__indicator--low"></div>
+          <h4 class="risk-card__title">70% Faster Planning</h4>
+          <span class="risk-card__value risk-card__value--low">AI-Powered</span>
+          <p class="risk-card__desc">Multi-agent AI system replaces months of manual migration planning with intelligent, parallel analysis.</p>
         </div>
         <div class="risk-card reveal" style="transition-delay: 0.3s">
           <div class="risk-card__indicator risk-card__indicator--low"></div>
-          <h4 class="risk-card__title">Data Loss Risk</h4>
-          <span class="risk-card__value risk-card__value--low">Low</span>
-          <p class="risk-card__desc">All storage formats are natively compatible. Zero-downtime data sync available.</p>
+          <h4 class="risk-card__title">$350K Saved per $1M</h4>
+          <span class="risk-card__value risk-card__value--low">Day 0</span>
+          <p class="risk-card__desc">Pre-calculated Reserved Instances and Savings Plans eliminate waste from the very first deployment.</p>
         </div>
         <div class="risk-card reveal" style="transition-delay: 0.4s">
           <div class="risk-card__indicator risk-card__indicator--low"></div>
-          <h4 class="risk-card__title">Downtime Estimate</h4>
-          <span class="risk-card__value risk-card__value--low">Minimal</span>
-          <p class="risk-card__desc">Blue-green deployment strategy limits downtime to under 4 minutes.</p>
+          <h4 class="risk-card__title">Zero FinOps Delay</h4>
+          <span class="risk-card__value risk-card__value--low">Parallel</span>
+          <p class="risk-card__desc">No 90-day wait. FinOps Intel Agent works alongside migration agents from the very start.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===================== FinOps Autopilot ===================== -->
+  <!-- ===================== FinOps Autopilot Dashboard ===================== -->
   <section class="section section--finops" id="finops" data-phase="finops">
     <div class="container">
       <div class="section__header reveal">
-        <span class="badge badge--finops">FinOps Autopilot</span>
-        <h2 class="section__title">Once You're on AWS, We Keep Optimizing</h2>
-        <p class="section__subtitle">Continuous cloud cost optimization powered by AI.</p>
+        <span class="badge badge--finops">Watchdog Agent</span>
+        <h2 class="section__title">Post-Migration: Continuous Optimization</h2>
+        <p class="section__subtitle">RADCloud's Watchdog Agent monitors, detects anomalies, and triggers auto-remediation.</p>
       </div>
 
       <div class="finops-dashboard reveal" style="transition-delay: 0.1s">
@@ -614,7 +636,7 @@
             </div>
             <div class="finops-legend__item">
               <span class="finops-legend__dot" style="background: #bc8cff"></span>
-              <span class="finops-legend__name">Other</span>
+              <span class="finops-legend__name">Lambda</span>
               <span class="finops-legend__val">$586</span>
             </div>
           </div>
@@ -622,34 +644,34 @@
 
         <!-- Right: KPI Summary -->
         <div class="finops-kpi-panel">
-          <h3 class="finops-panel__title">Optimization Summary</h3>
+          <h3 class="finops-panel__title">Watchdog Agent Dashboard</h3>
           <div class="finops-kpis">
             <div class="finops-kpi">
-              <div class="finops-kpi__icon">💰</div>
+              <div class="finops-kpi__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
               <div class="finops-kpi__body">
                 <span class="finops-kpi__value" data-target="6506">$0</span>
                 <span class="finops-kpi__label">Monthly AWS Spend</span>
               </div>
             </div>
             <div class="finops-kpi">
-              <div class="finops-kpi__icon">📉</div>
+              <div class="finops-kpi__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
               <div class="finops-kpi__body">
                 <span class="finops-kpi__value finops-kpi__value--green" data-target="2924">$0</span>
                 <span class="finops-kpi__label">Savings Identified</span>
               </div>
             </div>
             <div class="finops-kpi">
-              <div class="finops-kpi__icon">⚡</div>
+              <div class="finops-kpi__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
               <div class="finops-kpi__body">
                 <span class="finops-kpi__value finops-kpi__value--green" data-target="94">0</span>
                 <span class="finops-kpi__label">Resources Optimized (%)</span>
               </div>
             </div>
             <div class="finops-kpi">
-              <div class="finops-kpi__icon">🤖</div>
+              <div class="finops-kpi__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg></div>
               <div class="finops-kpi__body">
-                <span class="finops-kpi__value" data-target="12">0</span>
-                <span class="finops-kpi__label">Active Auto-Rules</span>
+                <span class="finops-kpi__value" data-target="5">0</span>
+                <span class="finops-kpi__label">Active AI Agents</span>
               </div>
             </div>
           </div>
@@ -660,14 +682,14 @@
       <div class="finops-charts-row">
         <div class="finops-chart-card reveal" style="transition-delay: 0.1s">
           <h3 class="finops-panel__title">Cost Trend — 6 Month Projection</h3>
-          <p class="finops-chart-card__sub">Projected savings after CloudShift migration and FinOps autopilot.</p>
+          <p class="finops-chart-card__sub">Projected savings with RADCloud's Day 0 optimization vs traditional sequential approach.</p>
           <div class="finops-chart-canvas-wrap finops-chart-canvas-wrap--line">
             <canvas id="cost-trend-line"></canvas>
           </div>
         </div>
         <div class="finops-chart-card reveal" style="transition-delay: 0.2s">
           <h3 class="finops-panel__title">Before vs After — By Service</h3>
-          <p class="finops-chart-card__sub">Per-service cost comparison: GCP current vs AWS optimized.</p>
+          <p class="finops-chart-card__sub">Per-service cost comparison: GCP current vs AWS optimized by RADCloud.</p>
           <div class="finops-chart-canvas-wrap finops-chart-canvas-wrap--bar">
             <canvas id="cost-compare-bar"></canvas>
           </div>
@@ -677,14 +699,14 @@
       <!-- Optimization Opportunity Cards -->
       <div class="optim-section">
         <h3 class="finops-panel__title reveal" style="transition-delay: 0.05s">AI-Detected Optimization Opportunities</h3>
-        <p class="finops-chart-card__sub reveal" style="transition-delay: 0.1s">Hover or tap a card to see the recommended action.</p>
+        <p class="finops-chart-card__sub reveal" style="transition-delay: 0.1s">FinOps Intel Agent detects waste and pre-calculates fixes. Hover or tap a card.</p>
         <div class="optim-grid">
 
           <div class="optim-flip reveal" style="transition-delay: 0.15s">
             <div class="optim-flip__inner">
               <div class="optim-flip__front">
                 <div class="optim-flip__badge optim-flip__badge--high">High Impact</div>
-                <div class="optim-flip__icon">📐</div>
+                <div class="optim-flip__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
                 <h4 class="optim-flip__title">Right-Size EC2 Instances</h4>
                 <p class="optim-flip__stat">14 instances oversized by &gt;40%</p>
                 <div class="optim-flip__savings">
@@ -693,12 +715,12 @@
                 </div>
               </div>
               <div class="optim-flip__back">
-                <div class="optim-flip__back-icon">✅</div>
-                <h4 class="optim-flip__back-title">Recommended Action</h4>
+                <div class="optim-flip__back-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3fb950" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+                <h4 class="optim-flip__back-title">Auto-Fix Applied</h4>
                 <ul class="optim-flip__actions">
-                  <li>Downsize 9× m5.xlarge → m5.large</li>
-                  <li>Switch 3× c5.2xl → c6g.xl (Graviton)</li>
-                  <li>Terminate 2× idle dev instances</li>
+                  <li>Downsize 9x m5.xlarge → m5.large</li>
+                  <li>Switch 3x c5.2xl → c6g.xl (Graviton)</li>
+                  <li>Terminate 2x idle dev instances</li>
                 </ul>
                 <span class="optim-flip__confidence">Confidence: 97%</span>
               </div>
@@ -709,7 +731,7 @@
             <div class="optim-flip__inner">
               <div class="optim-flip__front">
                 <div class="optim-flip__badge optim-flip__badge--medium">Medium Impact</div>
-                <div class="optim-flip__icon">🗄️</div>
+                <div class="optim-flip__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h14a2 2 0 0 0 2-2V7.5L14.5 2H6a2 2 0 0 0-2 2v4"/><polyline points="14 2 14 8 20 8"/><path d="m3 15 2 2 4-4"/></svg></div>
                 <h4 class="optim-flip__title">S3 Lifecycle Policies</h4>
                 <p class="optim-flip__stat">3.4 TB in expensive storage tiers</p>
                 <div class="optim-flip__savings">
@@ -718,8 +740,8 @@
                 </div>
               </div>
               <div class="optim-flip__back">
-                <div class="optim-flip__back-icon">✅</div>
-                <h4 class="optim-flip__back-title">Recommended Action</h4>
+                <div class="optim-flip__back-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3fb950" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+                <h4 class="optim-flip__back-title">Auto-Fix Applied</h4>
                 <ul class="optim-flip__actions">
                   <li>Move 2.1 TB to S3 Infrequent Access</li>
                   <li>Archive 1.1 TB to S3 Glacier</li>
@@ -734,20 +756,20 @@
             <div class="optim-flip__inner">
               <div class="optim-flip__front">
                 <div class="optim-flip__badge optim-flip__badge--high">High Impact</div>
-                <div class="optim-flip__icon">💾</div>
-                <h4 class="optim-flip__title">RDS Reserved Instances</h4>
-                <p class="optim-flip__stat">3 databases running on-demand</p>
+                <div class="optim-flip__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg></div>
+                <h4 class="optim-flip__title">Reserved Instance Strategy</h4>
+                <p class="optim-flip__stat">Replace expiring GCP commitments with AWS RIs</p>
                 <div class="optim-flip__savings">
                   <span class="optim-flip__savings-amount">$520</span>
                   <span class="optim-flip__savings-label">/mo savings</span>
                 </div>
               </div>
               <div class="optim-flip__back">
-                <div class="optim-flip__back-icon">✅</div>
-                <h4 class="optim-flip__back-title">Recommended Action</h4>
+                <div class="optim-flip__back-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3fb950" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+                <h4 class="optim-flip__back-title">Auto-Fix Applied</h4>
                 <ul class="optim-flip__actions">
                   <li>Purchase 1yr RI for prod db.r5.xlarge</li>
-                  <li>Convert 2× staging to db.t3.medium</li>
+                  <li>Convert 2x staging to db.t3.medium</li>
                   <li>Enable Aurora Serverless v2 scaling</li>
                 </ul>
                 <span class="optim-flip__confidence">Confidence: 91%</span>
@@ -760,38 +782,38 @@
 
       <!-- Auto-Remediation Flow -->
       <div class="remediation-section">
-        <h3 class="finops-panel__title reveal" style="transition-delay: 0.05s">Auto-Remediation Pipeline</h3>
-        <p class="finops-chart-card__sub reveal" style="transition-delay: 0.1s">CloudShift continuously monitors and auto-applies optimizations when safe.</p>
+        <h3 class="finops-panel__title reveal" style="transition-delay: 0.05s">Watchdog Auto-Remediation Pipeline</h3>
+        <p class="finops-chart-card__sub reveal" style="transition-delay: 0.1s">Post-migration, the Watchdog Agent continuously monitors and auto-applies optimizations when safe.</p>
 
         <div class="remediation-flow reveal" style="transition-delay: 0.15s">
           <div class="remediation-step">
-            <div class="remediation-step__icon">🔍</div>
+            <div class="remediation-step__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></div>
             <h4 class="remediation-step__title">Detect</h4>
-            <p class="remediation-step__desc">AI scans for cost anomalies and waste patterns every 15 minutes.</p>
+            <p class="remediation-step__desc">Watchdog scans for cost anomalies and waste patterns every 15 minutes.</p>
           </div>
           <div class="remediation-arrow">
             <svg width="40" height="20" viewBox="0 0 40 20"><path d="M0 10h32M28 4l8 6-8 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </div>
           <div class="remediation-step">
-            <div class="remediation-step__icon">⚖️</div>
+            <div class="remediation-step__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
             <h4 class="remediation-step__title">Evaluate</h4>
-            <p class="remediation-step__desc">Risk assessment ensures changes won't impact performance or availability.</p>
+            <p class="remediation-step__desc">Risk Agent ensures changes won't impact performance or availability.</p>
           </div>
           <div class="remediation-arrow">
             <svg width="40" height="20" viewBox="0 0 40 20"><path d="M0 10h32M28 4l8 6-8 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </div>
           <div class="remediation-step">
-            <div class="remediation-step__icon">🔧</div>
+            <div class="remediation-step__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
             <h4 class="remediation-step__title">Apply</h4>
-            <p class="remediation-step__desc">Auto-applies safe changes: scaling, scheduling, and tier adjustments.</p>
+            <p class="remediation-step__desc">Auto-applies safe changes: scaling, scheduling, RI purchases, and tier adjustments.</p>
           </div>
           <div class="remediation-arrow">
             <svg width="40" height="20" viewBox="0 0 40 20"><path d="M0 10h32M28 4l8 6-8 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </div>
           <div class="remediation-step">
-            <div class="remediation-step__icon">✅</div>
+            <div class="remediation-step__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
             <h4 class="remediation-step__title">Verify</h4>
-            <p class="remediation-step__desc">Validates health metrics post-change and auto-rolls back if needed.</p>
+            <p class="remediation-step__desc">Validates health metrics post-change and auto-rolls back if anomalies detected.</p>
           </div>
         </div>
 
@@ -800,7 +822,7 @@
           <div class="savings-total__left">
             <div class="savings-total__status">
               <span class="savings-total__dot"></span>
-              <span class="savings-total__status-text">Autopilot Active</span>
+              <span class="savings-total__status-text">All 5 Agents Active</span>
             </div>
             <div class="savings-total__line">
               <span class="savings-total__label">Total Monthly Savings</span>
@@ -815,7 +837,7 @@
             <div class="savings-total__breakdown">
               <div class="savings-total__item"><span>EC2 Right-Sizing</span><span class="savings-total__item-val">$840</span></div>
               <div class="savings-total__item"><span>S3 Lifecycle</span><span class="savings-total__item-val">$380</span></div>
-              <div class="savings-total__item"><span>RDS Reserved</span><span class="savings-total__item-val">$520</span></div>
+              <div class="savings-total__item"><span>Reserved Instances</span><span class="savings-total__item-val">$520</span></div>
             </div>
           </div>
         </div>
@@ -827,9 +849,9 @@
   <section class="section section--terminal" id="terminal" data-phase="aws">
     <div class="container">
       <div class="section__header reveal">
-        <span class="badge badge--aws">Migration Runbook</span>
-        <h2 class="section__title">Auto-Generated Runbooks</h2>
-        <p class="section__subtitle">Step-by-step migration instructions, generated by AI.</p>
+        <span class="badge badge--aws">Output: IaC Generation</span>
+        <h2 class="section__title">Auto-Generated Migration Runbook</h2>
+        <p class="section__subtitle">RADCloud generates deployment-ready Terraform, runbooks, and FinOps plans.</p>
       </div>
 
       <div class="terminal reveal" id="runbook-terminal">
@@ -839,7 +861,7 @@
             <span class="terminal__dot terminal__dot--yellow"></span>
             <span class="terminal__dot terminal__dot--green"></span>
           </div>
-          <span class="terminal__title">cloudshift-runbook.sh — bash</span>
+          <span class="terminal__title">radcloud-runbook.sh — bash</span>
         </div>
         <div class="terminal__body">
           <pre class="terminal__output" id="terminal-output"></pre>
@@ -849,70 +871,70 @@
     </div>
   </section>
 
-  <!-- ===================== AWS Services ===================== -->
+  <!-- ===================== Tech Stack ===================== -->
   <section class="section section--services" id="aws-services" data-phase="aws">
     <div class="container">
       <div class="section__header reveal">
         <span class="badge badge--aws">Tech Stack</span>
-        <h2 class="section__title">Powered by AWS</h2>
-        <p class="section__subtitle">The AWS services that make CloudShift possible.</p>
+        <h2 class="section__title">Powered by AWS + AI</h2>
+        <p class="section__subtitle">The technology powering RADCloud's multi-agent intelligence system.</p>
       </div>
 
       <div class="services-grid">
         <div class="service-card reveal" style="transition-delay: 0s">
-          <div class="service-card__icon">🧠</div>
+          <div class="service-card__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"/></svg></div>
           <h4 class="service-card__name">Amazon Bedrock</h4>
-          <p class="service-card__desc">Foundation models for AI-powered infrastructure analysis and code generation.</p>
+          <p class="service-card__desc">Foundation models powering the AI reasoning engine for infrastructure analysis and code generation.</p>
           <span class="service-card__tag">AI Engine</span>
         </div>
 
         <div class="service-card reveal" style="transition-delay: 0.06s">
-          <div class="service-card__icon">⚡</div>
-          <h4 class="service-card__name">AWS Lambda</h4>
-          <p class="service-card__desc">Serverless compute for running migration analysis and transformation logic.</p>
-          <span class="service-card__tag">Compute</span>
+          <div class="service-card__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg></div>
+          <h4 class="service-card__name">Claude API</h4>
+          <p class="service-card__desc">LLM reasoning engine with shared context store for cross-agent intelligence and contextual understanding.</p>
+          <span class="service-card__tag">LLM Core</span>
         </div>
 
         <div class="service-card reveal" style="transition-delay: 0.12s">
-          <div class="service-card__icon">🪣</div>
-          <h4 class="service-card__name">Amazon S3</h4>
-          <p class="service-card__desc">Stores migration artifacts, IaC templates, and generated runbook outputs.</p>
-          <span class="service-card__tag">Storage</span>
+          <div class="service-card__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+          <h4 class="service-card__name">AWS Pricing API</h4>
+          <p class="service-card__desc">Real-time pricing data for pre-calculating Reserved Instances, Savings Plans, and right-sized costs.</p>
+          <span class="service-card__tag">Cost Data</span>
         </div>
 
         <div class="service-card reveal" style="transition-delay: 0.18s">
-          <div class="service-card__icon">🗃️</div>
-          <h4 class="service-card__name">Amazon DynamoDB</h4>
-          <p class="service-card__desc">NoSQL database tracking service mappings, risk scores, and migration state.</p>
-          <span class="service-card__tag">Database</span>
+          <div class="service-card__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg></div>
+          <h4 class="service-card__name">AWS Cost Explorer</h4>
+          <p class="service-card__desc">Historical cost analysis and usage pattern detection for intelligent FinOps recommendations.</p>
+          <span class="service-card__tag">Analytics</span>
         </div>
 
         <div class="service-card reveal" style="transition-delay: 0.24s">
-          <div class="service-card__icon">🔄</div>
-          <h4 class="service-card__name">AWS Step Functions</h4>
-          <p class="service-card__desc">Orchestrates the 4-stage migration pipeline from ingestion to deployment.</p>
-          <span class="service-card__tag">Orchestration</span>
+          <div class="service-card__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div>
+          <h4 class="service-card__name">AWS Compute Optimizer</h4>
+          <p class="service-card__desc">ML-driven compute right-sizing recommendations integrated into the FinOps Intel Agent.</p>
+          <span class="service-card__tag">Optimization</span>
         </div>
 
         <div class="service-card reveal" style="transition-delay: 0.3s">
-          <div class="service-card__icon">📊</div>
-          <h4 class="service-card__name">Amazon CloudWatch</h4>
-          <p class="service-card__desc">Monitors migration health, cost metrics, and FinOps autopilot dashboards.</p>
-          <span class="service-card__tag">Monitoring</span>
+          <div class="service-card__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+          <h4 class="service-card__name">Terraform / YAML</h4>
+          <p class="service-card__desc">Infrastructure-as-Code generation — converts GCP configs into deployment-ready AWS Terraform.</p>
+          <span class="service-card__tag">IaC Output</span>
         </div>
 
         <div class="service-card reveal" style="transition-delay: 0.36s">
-          <div class="service-card__icon">🔐</div>
-          <h4 class="service-card__name">AWS IAM</h4>
-          <p class="service-card__desc">Manages least-privilege access policies for cross-cloud resource access.</p>
-          <span class="service-card__tag">Security</span>
+          <div class="service-card__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></svg></div>
+          <h4 class="service-card__name">gcloud CLI Parsing</h4>
+          <p class="service-card__desc">Automated extraction and parsing of GCP infrastructure configurations for Discovery Agent.</p>
+          <span class="service-card__tag">Ingestion</span>
         </div>
 
         <div class="service-card reveal" style="transition-delay: 0.42s">
-          <div class="service-card__icon">🏗️</div>
-          <h4 class="service-card__name">AWS CloudFormation</h4>
-          <p class="service-card__desc">Provisions target AWS infrastructure using auto-generated IaC templates.</p>
-          <span class="service-card__tag">Infrastructure</span>
+          <div class="service-card__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <h4 class="service-card__name">Multi-Agent System</h4>
+          <p class="service-card__desc">5 specialized agents (Discovery, Mapping, Risk, FinOps Intel, Watchdog) orchestrated with shared context.</p>
+          <span class="service-card__tag">Architecture</span>
         </div>
       </div>
     </div>
@@ -924,13 +946,13 @@
       <div class="footer__inner">
         <!-- Brand -->
         <div class="footer__brand">
-          <div class="footer__brand-name">CloudShift</div>
+          <div class="footer__brand-name">RADCloud</div>
           <p class="footer__brand-desc">
-            AI-powered GCP-to-AWS migration accelerator and FinOps autopilot.
-            Migrate smarter, spend less, optimize forever.
+            Migration-Native FinOps — One Unified AI OS for Cloud Transition.
+            Migrate smarter. Optimize from Day 0.
           </p>
           <div class="mt-lg">
-            <span class="footer__hackathon">⚡ Built for Hack 'A' War</span>
+            <span class="footer__hackathon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:4px"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Built for Hack 'A' War</span>
           </div>
         </div>
 
@@ -938,51 +960,64 @@
         <div class="footer__col">
           <div class="footer__heading">Navigation</div>
           <a href="#hero" class="footer__link">Home</a>
-          <a href="#transition" class="footer__link">Our Solution</a>
-          <a href="#service-mapping" class="footer__link">Service Mapping</a>
-          <a href="#finops" class="footer__link">FinOps Autopilot</a>
-          <a href="details.html" class="footer__link">Technical Details</a>
+          <a href="#transition" class="footer__link">Solution</a>
+          <a href="#service-mapping" class="footer__link">Cross-Cloud Intelligence</a>
+          <a href="#finops" class="footer__link">Watchdog Agent</a>
+          <a href="details.html" class="footer__link">Architecture</a>
         </div>
 
-        <!-- Problem Statements -->
+        <!-- Core Features -->
         <div class="footer__col">
-          <div class="footer__heading">Problem Statements</div>
-          <a href="#hero" class="footer__link">GCP→AWS Migrator</a>
-          <a href="#finops" class="footer__link">FinOps Autopilot</a>
-          <a href="#aws-services" class="footer__link">AWS Services</a>
+          <div class="footer__heading">Core Features</div>
+          <a href="#transition" class="footer__link">Parallel Migration + FinOps</a>
+          <a href="#service-mapping" class="footer__link">AI Service Translation</a>
+          <a href="#finops" class="footer__link">Day 0 Optimization</a>
+          <a href="#aws-services" class="footer__link">Multi-Agent System</a>
         </div>
 
         <!-- Team -->
         <div class="footer__col">
-          <div class="footer__heading">Team ByteMyOps</div>
-          <div class="footer__team-member">
-            <div class="footer__member-avatar">RG</div>
-            <span class="footer__member-name">Ryan Gomez</span>
-          </div>
+          <div class="footer__heading">Team RADCloud</div>
           <div class="footer__team-member">
             <div class="footer__member-avatar">AB</div>
-            <span class="footer__member-name">Ahad Ulla Baig</span>
-          </div>
-          <div class="footer__team-member">
-            <div class="footer__member-avatar">DG</div>
-            <span class="footer__member-name">Divisha Gera</span>
+            <span class="footer__member-name">Ahad — AI Engineer</span>
           </div>
           <div class="footer__team-member">
             <div class="footer__member-avatar">AP</div>
-            <span class="footer__member-name">Anjali A Purohit</span>
+            <span class="footer__member-name">Anjali — Backend Engineer</span>
+          </div>
+          <div class="footer__team-member">
+            <div class="footer__member-avatar">DG</div>
+            <span class="footer__member-name">Divisha — Cloud Engineer</span>
+          </div>
+          <div class="footer__team-member">
+            <div class="footer__member-avatar">RG</div>
+            <span class="footer__member-name">Ryan — Frontend Dev</span>
           </div>
         </div>
       </div>
 
       <!-- Bottom bar -->
       <div class="footer__bottom">
-        <p class="footer__copyright">© 2026 ByteMyOps. Built with ❤️ for Hack 'A' War.</p>
-        <span class="footer__hackathon">🏆 Theme: Automating Ops Workflows</span>
+        <p class="footer__copyright">© 2026 RADCloud. Built with ♥ for Hack 'A' War.</p>
+        <span class="footer__hackathon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f0883e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:4px"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5C7 4 7 7 7 7"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5C17 4 17 7 17 7"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg> Prototype built in 24 hours</span>
       </div>
     </div>
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js" defer></script>
   <script src="js/main.js" defer></script>
+  <script>
+    // Loader dismissal
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        var loader = document.getElementById('loader');
+        if (loader) {
+          loader.classList.add('loader--hidden');
+          setTimeout(function() { loader.remove(); }, 600);
+        }
+      }, 2000);
+    });
+  </script>
 </body>
 </html>

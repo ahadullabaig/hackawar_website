@@ -3,52 +3,1060 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Technical Details — CloudShift | ByteMyOps</title>
-  <meta name="description" content="Technical deep dive into CloudShift's architecture, service mapping, and AWS implementation. By ByteMyOps for Hack 'A' War.">
+  <title>Architecture & Technical Deep Dive — RADCloud</title>
+  <meta name="description" content="Technical deep dive into RADCloud's multi-agent AI architecture, 5 specialized agents, tech stack, outputs, execution timeline, and team.">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
+  <link rel="icon" type="image/jpeg" href="img/image.png">
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ===== Details Page — Premium Styles ===== */
+
+    /* Animated background */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background:
+        radial-gradient(ellipse 60% 40% at 20% 30%, rgba(66,133,244,0.06) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 50% at 80% 60%, rgba(255,153,0,0.05) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 30% at 50% 80%, rgba(0,200,83,0.04) 0%, transparent 70%);
+      animation: bgShift 12s ease-in-out infinite alternate;
+    }
+    @keyframes bgShift {
+      0% { opacity: 0.6; }
+      100% { opacity: 1; }
+    }
+
+    .details-hero {
+      padding-top: 120px;
+      padding-bottom: 40px;
+      text-align: center;
+      position: relative;
+    }
+    .details-hero .section__title {
+      font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+      background: linear-gradient(135deg, var(--text-primary, #f2f3f3) 30%, var(--accent-primary, #FF9900));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
+    .details-hero .section__subtitle {
+      text-align: center;
+      max-width: 640px;
+      margin-left: auto;
+      margin-right: auto;
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
+
+    /* Section defaults */
+    .details-section {
+      padding: 48px 0;
+      border-top: none;
+    }
+    .details-section:first-of-type {
+      padding-top: 24px;
+    }
+    .divider--gradient {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,153,0,0.3), transparent);
+      border: none;
+      margin: 0 0 48px;
+      opacity: 1;
+    }
+
+    /* Architecture Diagram */
+    .arch-diagram {
+      display: grid;
+      grid-template-columns: 1fr auto 1.15fr auto 1fr;
+      gap: 0;
+      align-items: stretch;
+      margin: 40px 0 0;
+    }
+    @media (max-width: 900px) {
+      .arch-diagram {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .arch-arrow { transform: rotate(90deg); }
+    }
+    .arch-block {
+      background: rgba(30,40,58,0.6);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 32px 28px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+      backdrop-filter: blur(12px);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .arch-block::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: 17px;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(255,153,0,0.2), transparent, rgba(66,133,244,0.2));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+    .arch-block:hover::before { opacity: 1; }
+    .arch-block:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 48px rgba(255,153,0,0.15);
+      border-color: rgba(255,153,0,0.2);
+    }
+    .arch-block__icon {
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .arch-block__icon svg {
+      width: 44px;
+      height: 44px;
+      stroke: var(--accent-primary, #FF9900);
+      filter: drop-shadow(0 0 8px rgba(255,153,0,0.4));
+    }
+    .arch-block__title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--text-primary, #f2f3f3);
+      margin-bottom: 12px;
+    }
+    .arch-block__list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      text-align: left;
+      width: 100%;
+    }
+    .arch-block__list li {
+      font-size: 0.82rem;
+      color: var(--text-secondary, #afb4be);
+      padding: 4px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .arch-block__list li::before {
+      content: '';
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--accent-primary, #FF9900);
+      flex-shrink: 0;
+      opacity: 0.6;
+    }
+    .arch-block--core {
+      background: linear-gradient(135deg, rgba(255,153,0,0.12), rgba(255,100,0,0.06));
+      border-color: rgba(255,153,0,0.3);
+      box-shadow: 0 0 40px rgba(255,153,0,0.08);
+    }
+    .arch-block--core .arch-block__icon svg {
+      width: 48px;
+      height: 48px;
+      filter: drop-shadow(0 0 12px rgba(255,153,0,0.5));
+    }
+    .arch-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 12px;
+    }
+    .arch-arrow svg {
+      width: 50px;
+      height: 24px;
+      color: var(--accent-primary, #FF9900);
+      opacity: 0.7;
+      animation: arrowPulse 2s ease-in-out infinite;
+    }
+    @keyframes arrowPulse {
+      0%, 100% { opacity: 0.5; transform: translateX(0); }
+      50% { opacity: 1; transform: translateX(4px); }
+    }
+
+    /* Agent Cards */
+    .agents-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin: 40px 0 0;
+    }
+    .agents-grid .agent-card:nth-child(4),
+    .agents-grid .agent-card:nth-child(5) {
+      max-width: 100%;
+    }
+    @media (max-width: 900px) {
+      .agents-grid { grid-template-columns: 1fr; }
+    }
+    .agent-card {
+      background: rgba(30,40,58,0.6);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 28px 24px;
+      transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(12px);
+    }
+    .agent-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent-primary, #FF9900), #4285F4, #00C853);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .agent-card::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at center, rgba(255,153,0,0.06), transparent 60%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+    .agent-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 60px rgba(255,153,0,0.15);
+      border-color: rgba(255,153,0,0.3);
+    }
+    .agent-card:hover::before { opacity: 1; }
+    .agent-card:hover::after { opacity: 1; }
+    .agent-card__icon {
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+    }
+    .agent-card__icon svg {
+      width: 32px;
+      height: 32px;
+      stroke: var(--accent-primary, #FF9900);
+      filter: drop-shadow(0 0 6px rgba(255,153,0,0.3));
+    }
+    .agent-card__name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--text-primary, #f2f3f3);
+      margin-bottom: 8px;
+    }
+    .agent-card__desc {
+      font-size: 0.85rem;
+      color: var(--text-secondary, #afb4be);
+      line-height: 1.6;
+    }
+    .agent-card__number {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 2.2rem;
+      opacity: 0.05;
+      color: var(--text-primary, #f2f3f3);
+    }
+
+    /* Tech Stack Layers */
+    .stack-layers {
+      display: grid;
+      gap: 16px;
+      margin: 40px 0 0;
+    }
+    .stack-layer {
+      background: rgba(30,40,58,0.6);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 24px 28px;
+      transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+      backdrop-filter: blur(12px);
+      position: relative;
+    }
+    .stack-layer::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      border-radius: 3px 0 0 3px;
+      background: linear-gradient(180deg, var(--accent-primary, #FF9900), rgba(255,153,0,0.2));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .stack-layer:hover::before { opacity: 1; }
+    .stack-layer:hover {
+      transform: translateX(4px);
+      box-shadow: 0 12px 36px rgba(0,0,0,0.25);
+      border-color: rgba(255,153,0,0.15);
+    }
+    .stack-layer__header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .stack-layer__icon {
+      display: flex;
+      align-items: center;
+    }
+    .stack-layer__icon svg {
+      width: 24px;
+      height: 24px;
+      stroke: var(--accent-primary, #FF9900);
+    }
+    .stack-layer__title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--text-primary, #f2f3f3);
+    }
+    .stack-layer__tag {
+      font-size: 0.65rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 600;
+      background: rgba(255,153,0,0.12);
+      color: var(--accent-primary, #FF9900);
+      border-radius: 4px;
+      padding: 2px 8px;
+      margin-left: auto;
+      border: 1px solid rgba(255,153,0,0.2);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .stack-layer__items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .stack-layer__item {
+      font-size: 0.78rem;
+      font-family: 'JetBrains Mono', monospace;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 6px;
+      padding: 5px 12px;
+      color: var(--text-secondary, #afb4be);
+      transition: all 0.3s ease;
+    }
+    .stack-layer__item:hover {
+      background: rgba(255,153,0,0.1);
+      border-color: rgba(255,153,0,0.3);
+      color: var(--text-primary, #f2f3f3);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(255,153,0,0.1);
+    }
+
+    /* Output Panels */
+    .output-panels {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin: 40px 0 0;
+      align-items: start;
+    }
+    @media (max-width: 1000px) {
+      .output-panels { grid-template-columns: 1fr; }
+    }
+    .output-panel {
+      background: rgba(30,40,58,0.6);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      backdrop-filter: blur(12px);
+      display: flex;
+      flex-direction: column;
+    }
+    .output-panel:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.3);
+    }
+    .output-panel__header {
+      padding: 14px 18px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255,153,0,0.03);
+      flex-shrink: 0;
+    }
+    .output-panel__icon {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    .output-panel__icon svg {
+      width: 18px;
+      height: 18px;
+      stroke: var(--accent-primary, #FF9900);
+    }
+    .output-panel__title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 0.88rem;
+      color: var(--text-primary, #f2f3f3);
+      white-space: nowrap;
+    }
+    .output-panel__body {
+      padding: 16px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .output-panel__code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      line-height: 1.65;
+      color: #c9d1d9;
+      background: rgba(0,0,0,0.4);
+      border: 1px solid rgba(255,255,255,0.04);
+      border-radius: 8px;
+      padding: 14px;
+      overflow-x: auto;
+      white-space: pre;
+      margin: 0;
+      flex: 1;
+    }
+    .output-panel__code .kw { color: #ff7b72; }
+    .output-panel__code .str { color: #a5d6ff; }
+    .output-panel__code .cm { color: #8b949e; }
+    .output-panel__code .fn { color: #d2a8ff; }
+    .output-panel__code .num { color: #79c0ff; }
+
+    .alert-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 10px;
+      flex: 1;
+    }
+    .alert-item {
+      display: flex;
+      gap: 10px;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      line-height: 1.5;
+      transition: transform 0.2s ease;
+    }
+    .alert-item:hover {
+      transform: translateX(3px);
+    }
+    .alert-item--warn {
+      background: rgba(255,153,0,0.06);
+      border: 1px solid rgba(255,153,0,0.15);
+      color: var(--text-secondary, #afb4be);
+    }
+    .alert-item--ok {
+      background: rgba(63,185,80,0.06);
+      border: 1px solid rgba(63,185,80,0.15);
+      color: var(--text-secondary, #afb4be);
+    }
+    .alert-item__icon {
+      flex-shrink: 0;
+      display: flex;
+      align-items: flex-start;
+      padding-top: 1px;
+    }
+    .alert-item__icon svg { width: 16px; height: 16px; }
+    .alert-item__text { flex: 1; }
+    .alert-item__text strong {
+      color: var(--text-primary, #f2f3f3);
+      font-size: 0.82rem;
+    }
+
+    /* Timeline */
+    .sprint-timeline {
+      position: relative;
+      margin: 40px 0 0;
+      padding-left: 40px;
+    }
+    .sprint-timeline::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 16px;
+      width: 2px;
+      background: linear-gradient(180deg, var(--accent-primary, #FF9900), #4285F4, rgba(0,200,83,0.4));
+      border-radius: 2px;
+    }
+    .sprint-step {
+      position: relative;
+      margin-bottom: 20px;
+      padding: 20px 24px;
+      background: rgba(30,40,58,0.6);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+      backdrop-filter: blur(12px);
+    }
+    .sprint-step:last-child { margin-bottom: 0; }
+    .sprint-step:hover {
+      transform: translateX(8px);
+      box-shadow: 0 12px 40px rgba(255,153,0,0.12);
+      border-color: rgba(255,153,0,0.2);
+    }
+    .sprint-step::before {
+      content: '';
+      position: absolute;
+      left: -32px;
+      top: 24px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--accent-primary, #FF9900);
+      border: 3px solid var(--bg-primary, #161E2D);
+      box-shadow: 0 0 16px rgba(255,153,0,0.5);
+      animation: dotPulse 2s ease-in-out infinite;
+    }
+    @keyframes dotPulse {
+      0%, 100% { box-shadow: 0 0 8px rgba(255,153,0,0.3); }
+      50% { box-shadow: 0 0 20px rgba(255,153,0,0.6); }
+    }
+    .sprint-step__hours {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--accent-primary, #FF9900);
+      margin-bottom: 4px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+    .sprint-step__title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--text-primary, #f2f3f3);
+      margin-bottom: 4px;
+    }
+    .sprint-step__desc {
+      font-size: 0.82rem;
+      color: var(--text-secondary, #afb4be);
+      line-height: 1.55;
+    }
+
+    /* Team Section */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin: 40px 0 0;
+    }
+    @media (max-width: 900px) {
+      .team-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    .team-card {
+      background: rgba(30,40,58,0.6);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 28px 20px;
+      text-align: center;
+      transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(12px);
+    }
+    .team-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent-primary, #FF9900), #4285F4);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .team-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 60px rgba(255,153,0,0.12);
+      border-color: rgba(255,153,0,0.25);
+    }
+    .team-card:hover::after {
+      opacity: 1;
+    }
+    .team-card__avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-primary, #FF9900), #4285F4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: #fff;
+      margin: 0 auto 14px;
+      box-shadow: 0 0 20px rgba(255,153,0,0.25);
+    }
+    .team-card__name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--text-primary, #f2f3f3);
+      margin-bottom: 4px;
+    }
+    .team-card__role {
+      font-size: 0.8rem;
+      color: var(--accent-primary, #FF9900);
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+    .team-card__focus {
+      font-size: 0.75rem;
+      color: var(--text-muted, #7d8591);
+      line-height: 1.5;
+    }
+
+    /* Typewriter animation */
+    .output-panel__code--typewriter {
+      position: relative;
+      min-height: 280px;
+    }
+    .typewriter-cursor {
+      display: inline;
+      color: var(--accent-primary, #FF9900);
+      animation: cursorBlink 0.7s step-end infinite;
+      font-weight: bold;
+    }
+    @keyframes cursorBlink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+    .output-panel__status {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.62rem;
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      flex-shrink: 0;
+    }
+    .output-panel__status--generating {
+      background: rgba(255,153,0,0.1);
+      color: var(--accent-primary, #FF9900);
+      border: 1px solid rgba(255,153,0,0.25);
+    }
+    .output-panel__status--complete {
+      background: rgba(63,185,80,0.1);
+      color: #3fb950;
+      border: 1px solid rgba(63,185,80,0.25);
+    }
+    .status-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .status-dot--pulse {
+      background: var(--accent-primary, #FF9900);
+      animation: statusPulse 1s ease-in-out infinite;
+    }
+    .status-dot--done {
+      background: #3fb950;
+    }
+    @keyframes statusPulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.7); }
+    }
+  </style>
+  <link rel="icon" type="image/jpeg" href="img/image.png">
 </head>
-<body>
+<body class="phase-aws" style="--bg-primary: rgb(22, 30, 45); --bg-secondary: rgb(30, 40, 58); --bg-tertiary: rgb(42, 56, 75); --text-primary: rgb(242, 243, 243); --text-secondary: rgb(175, 180, 190); --text-muted: rgb(125, 133, 145); --accent-primary: rgb(255, 153, 0); --accent-secondary: rgb(255, 184, 77); --accent-glow: rgba(255, 153, 0, 0.3); --grad-1: rgba(255, 153, 0, 0.07); --grad-2: rgba(100, 130, 180, 0.04);">
+
+  <!-- ===================== Premium Loading Screen ===================== -->
+  <div class="loader-overlay" id="loader">
+    <div class="loader__particles">
+      <div class="loader__particle"></div>
+      <div class="loader__particle"></div>
+      <div class="loader__particle"></div>
+      <div class="loader__particle"></div>
+      <div class="loader__particle"></div>
+      <div class="loader__particle"></div>
+    </div>
+    <div class="loader__logo-wrap">
+      <div class="loader__glow"></div>
+      <img src="img/image.png" alt="RADCloud" class="loader__logo-img">
+      <div class="loader__ring loader__ring--1"></div>
+      <div class="loader__ring loader__ring--2"></div>
+      <div class="loader__ring loader__ring--3"></div>
+    </div>
+    <div class="loader__title">RADCloud</div>
+    <div class="loader__subtitle">Architecture Deep Dive</div>
+  </div>
 
   <!-- ===================== Navigation ===================== -->
-  <nav class="nav nav--scrolled" id="main-nav">
+  <nav class="nav nav--scrolled nav--dark" id="main-nav">
     <div class="nav__inner">
       <a href="index.html" class="nav__logo" id="nav-logo">
-        <div class="nav__logo-icon" aria-hidden="true">C</div>
-        <span class="nav__logo-text">CloudShift</span>
-        <span class="nav__logo-badge">by ByteMyOps</span>
+        <img src="img/image.png" alt="RADCloud" style="width:36px;height:36px;border-radius:6px;object-fit:cover;">
+        <span class="nav__logo-text">RADCloud</span>
+        <span class="nav__logo-badge">Migration-Native FinOps</span>
       </a>
       <div class="nav__links" id="nav-links">
         <a href="index.html" class="nav__link">Home</a>
         <a href="index.html#transition" class="nav__link">Solution</a>
         <a href="index.html#finops" class="nav__link">FinOps</a>
-        <a href="details.html" class="nav__link nav__link--active">Details</a>
-        <a href="index.html#aws-services" class="nav__cta">AWS Services →</a>
+        <a href="details.html" class="nav__link nav__link--active">Architecture</a>
+        <a href="index.html#aws-services" class="nav__cta">Tech Stack →</a>
       </div>
     </div>
   </nav>
 
-  <!-- ===================== Detail Page Content ===================== -->
-  <main style="padding-top: 120px; min-height: 100vh;">
-    <div class="container">
-      <div class="section__header text-left">
-        <span class="badge badge--aws">Technical Deep Dive</span>
-        <h1 class="section__title">How CloudShift Works</h1>
-        <p class="section__subtitle text-left">
-          Architecture, service mappings, wireframes, and the AWS services powering our solution.
-        </p>
-        <div class="divider"></div>
+  <!-- ===================== Page Header ===================== -->
+  <main>
+    <div class="details-hero">
+      <div class="container">
+        <div class="section__header">
+          <span class="badge badge--aws">Technical Deep Dive</span>
+          <h1 class="section__title">RADCloud Architecture</h1>
+          <p class="section__subtitle">
+            Multi-agent AI system, 5 specialized agents, cross-cloud intelligence, and the technology powering Day 0 optimization.
+          </p>
+        </div>
       </div>
+    </div>
 
-      <!-- Placeholder — will be expanded in Batch 6 -->
-      <p style="color: var(--text-muted); font-style: italic; padding: 60px 0;">
-        Detailed technical content coming soon...
-      </p>
+    <!-- ===================== Architecture Diagram ===================== -->
+    <div class="details-section">
+      <div class="container">
+        <div class="section__header reveal">
+          <span class="badge badge--aws">System Architecture</span>
+          <h2 class="section__title">Multi-Agent AI System</h2>
+          <p class="section__subtitle">Inputs → AI Brain → Specialized Agents → Deployment-Ready Outputs</p>
+        </div>
+
+        <div class="arch-diagram reveal">
+          <!-- Inputs -->
+          <div class="arch-block">
+            <div class="arch-block__icon"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
+            <div class="arch-block__title">Inputs</div>
+            <ul class="arch-block__list">
+              <li>GCP configurations</li>
+              <li>12 months billing data</li>
+              <li>Committed usage data</li>
+              <li>AWS account access</li>
+            </ul>
+          </div>
+
+          <!-- Arrow -->
+          <div class="arch-arrow">
+            <svg viewBox="0 0 50 24"><path d="M 0 12 L 40 12 M 34 6 L 40 12 L 34 18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+
+          <!-- AI Core -->
+          <div class="arch-block arch-block--core">
+            <div class="arch-block__icon"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"/></svg></div>
+            <div class="arch-block__title">AI Core (Claude API)</div>
+            <ul class="arch-block__list">
+              <li>LLM reasoning engine</li>
+              <li>Shared context store</li>
+              <li>Usage pattern analysis</li>
+              <li>Architectural reasoning</li>
+            </ul>
+          </div>
+
+          <!-- Arrow -->
+          <div class="arch-arrow">
+            <svg viewBox="0 0 50 24"><path d="M 0 12 L 40 12 M 34 6 L 40 12 L 34 18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+
+          <!-- Outputs -->
+          <div class="arch-block">
+            <div class="arch-block__icon"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg></div>
+            <div class="arch-block__title">Outputs</div>
+            <ul class="arch-block__list">
+              <li>Migration runbooks</li>
+              <li>AWS Terraform / IaC</li>
+              <li>Cost optimization plans</li>
+              <li>Real-time monitoring</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================== Five Agents ===================== -->
+    <div class="details-section">
+      <div class="container">
+        <hr class="divider--gradient">
+        <div class="section__header reveal">
+          <span class="badge badge--aws">Specialized Agents</span>
+          <h2 class="section__title">5 AI Agents Working in Parallel</h2>
+          <p class="section__subtitle">Each agent is specialized for a critical phase of migration + FinOps optimization.</p>
+        </div>
+
+        <div class="agents-grid">
+          <div class="agent-card reveal">
+            <span class="agent-card__number">01</span>
+            <div class="agent-card__icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/><path d="M11 8v6M8 11h6"/></svg></div>
+            <div class="agent-card__name">Discovery Agent</div>
+            <p class="agent-card__desc">Identifies all GCP resources, configurations, dependencies, and usage patterns. Scans IAM, networking, compute, storage, and database layers.</p>
+          </div>
+          <div class="agent-card reveal">
+            <span class="agent-card__number">02</span>
+            <div class="agent-card__icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg></div>
+            <div class="agent-card__name">Mapping Agent</div>
+            <p class="agent-card__desc">Maps every GCP service to its optimal AWS equivalent. Flags incompatible services (~15%) and generates compatibility scores.</p>
+          </div>
+          <div class="agent-card reveal">
+            <span class="agent-card__number">03</span>
+            <div class="agent-card__icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+            <div class="agent-card__name">Risk Agent</div>
+            <p class="agent-card__desc">Detects deployment risks, architecture incompatibilities, and data migration hazards. Produces confidence-ranked migration plans with rollback strategies.</p>
+          </div>
+          <div class="agent-card reveal">
+            <span class="agent-card__number">04</span>
+            <div class="agent-card__icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+            <div class="agent-card__name">FinOps Intel Agent</div>
+            <p class="agent-card__desc">Analyzes 12 months of usage data to pre-calculate Reserved Instances, Savings Plans, and right-sized compute — optimized BEFORE deployment.</p>
+          </div>
+          <div class="agent-card reveal">
+            <span class="agent-card__number">05</span>
+            <div class="agent-card__icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg></div>
+            <div class="agent-card__name">Watchdog Agent</div>
+            <p class="agent-card__desc">Post-migration continuous monitoring. Detects anomalies, cost spikes, and performance issues. Triggers auto-remediation when safe.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================== Tech Stack ===================== -->
+    <div class="details-section">
+      <div class="container">
+        <hr class="divider--gradient">
+        <div class="section__header reveal">
+          <span class="badge badge--aws">Tech Stack</span>
+          <h2 class="section__title">Layered Architecture</h2>
+          <p class="section__subtitle">Three layers of technology powering RADCloud's intelligence.</p>
+        </div>
+
+        <div class="stack-layers">
+          <div class="stack-layer reveal">
+            <div class="stack-layer__header">
+              <span class="stack-layer__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg></span>
+              <span class="stack-layer__title">Orchestration & Ingestion</span>
+              <span class="stack-layer__tag">Layer 1</span>
+            </div>
+            <div class="stack-layer__items">
+              <span class="stack-layer__item">gcloud CLI Parsing</span>
+              <span class="stack-layer__item">Terraform / YAML Parsing</span>
+              <span class="stack-layer__item">AWS Account Connector</span>
+              <span class="stack-layer__item">Multi-Agent Orchestrator</span>
+            </div>
+          </div>
+
+          <div class="stack-layer reveal">
+            <div class="stack-layer__header">
+              <span class="stack-layer__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"/></svg></span>
+              <span class="stack-layer__title">Intelligence Core</span>
+              <span class="stack-layer__tag">Layer 2</span>
+            </div>
+            <div class="stack-layer__items">
+              <span class="stack-layer__item">Amazon Bedrock</span>
+              <span class="stack-layer__item">Claude API</span>
+              <span class="stack-layer__item">Shared Context Store</span>
+              <span class="stack-layer__item">Contextual Reasoning Engine</span>
+            </div>
+          </div>
+
+          <div class="stack-layer reveal">
+            <div class="stack-layer__header">
+              <span class="stack-layer__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg></span>
+              <span class="stack-layer__title">Data & Cost Analytics</span>
+              <span class="stack-layer__tag">Layer 3</span>
+            </div>
+            <div class="stack-layer__items">
+              <span class="stack-layer__item">AWS Pricing API</span>
+              <span class="stack-layer__item">AWS Cost Explorer API</span>
+              <span class="stack-layer__item">AWS Compute Optimizer</span>
+              <span class="stack-layer__item">Usage Pattern Analyzer</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================== Outputs ===================== -->
+    <div class="details-section">
+      <div class="container">
+        <hr class="divider--gradient">
+        <div class="section__header reveal">
+          <span class="badge badge--aws">Outputs</span>
+          <h2 class="section__title">What RADCloud Generates</h2>
+          <p class="section__subtitle">Deployment-ready code, risk alerts, and automated cost optimizations.</p>
+        </div>
+
+        <div class="output-panels">
+          <!-- Terraform Code -->
+          <div class="output-panel reveal">
+            <div class="output-panel__header">
+              <span class="output-panel__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></span>
+              <span class="output-panel__title">Infrastructure Code (Terraform)</span>
+              <span class="output-panel__status output-panel__status--generating" id="terraform-status"><span class="status-dot status-dot--pulse"></span> Generating...</span>
+            </div>
+            <div class="output-panel__body">
+              <pre class="output-panel__code output-panel__code--typewriter" id="terraform-code"></pre>
+
+            </div>
+          </div>
+
+          <!-- Risk Alerts -->
+          <div class="output-panel reveal">
+            <div class="output-panel__header">
+              <span class="output-panel__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FF9900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+              <span class="output-panel__title">Risk Alerts</span>
+            </div>
+            <div class="output-panel__body">
+              <ul class="alert-list">
+                <li class="alert-item alert-item--warn">
+                  <span class="alert-item__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FF9900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+                  <div class="alert-item__text">
+                    <strong>Incompatible Service Detected</strong><br>
+                    GCP Cloud Spanner has no direct AWS equivalent. Suggested: Amazon Aurora Global Database with manual schema migration.
+                  </div>
+                </li>
+                <li class="alert-item alert-item--warn">
+                  <span class="alert-item__icon">&#x26A0;</span>
+                  <div class="alert-item__text">
+                    <strong>Expiring Commitment</strong><br>
+                    GCP committed use discount expires in 45 days. RADCloud pre-calculated AWS Reserved Instance to replace it.
+                  </div>
+                </li>
+                <li class="alert-item alert-item--ok">
+                  <span class="alert-item__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3fb950" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></span>
+                  <div class="alert-item__text">
+                    <strong>Data Migration Safe</strong><br>
+                    All Cloud Storage → S3 transfers validated. Zero-downtime sync available. Formats 100% compatible.
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Auto FinOps Fix -->
+          <div class="output-panel reveal">
+            <div class="output-panel__header">
+              <span class="output-panel__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span>
+              <span class="output-panel__title">Auto FinOps Fixes</span>
+              <span class="output-panel__status output-panel__status--generating" id="finops-status"><span class="status-dot status-dot--pulse"></span> Generating...</span>
+            </div>
+            <div class="output-panel__body">
+              <pre class="output-panel__code output-panel__code--typewriter" id="finops-code"></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================== Execution Timeline ===================== -->
+    <div class="details-section">
+      <div class="container">
+        <hr class="divider--gradient">
+        <div class="section__header reveal">
+          <span class="badge badge--aws">24-Hour Sprint</span>
+          <h2 class="section__title">From Architecture to Prototype in 24 Hours</h2>
+          <p class="section__subtitle">A 24-hour execution sprint transformed the conceptual architecture into a functional prototype.</p>
+        </div>
+
+        <div class="sprint-timeline">
+          <div class="sprint-step reveal">
+            <div class="sprint-step__hours">Hours 1–6</div>
+            <div class="sprint-step__title">Foundation</div>
+            <div class="sprint-step__desc">Stand up Amazon Bedrock / Claude API connections; build the core GCP Terraform/YAML parser.</div>
+          </div>
+
+          <div class="sprint-step reveal">
+            <div class="sprint-step__hours">Hours 6–12</div>
+            <div class="sprint-step__title">Intelligence</div>
+            <div class="sprint-step__desc">Develop the Discovery and Mapping Agents; establish stable hooks into the AWS Pricing API.</div>
+          </div>
+
+          <div class="sprint-step reveal">
+            <div class="sprint-step__hours">Hours 12–18</div>
+            <div class="sprint-step__title">FinOps</div>
+            <div class="sprint-step__desc">Build and train the FinOps Intel Agent to execute accurate RI and right-sizing calculations based on historical data.</div>
+          </div>
+
+          <div class="sprint-step reveal">
+            <div class="sprint-step__hours">Hours 18–24</div>
+            <div class="sprint-step__title">Execution</div>
+            <div class="sprint-step__desc">Finalize UI dashboard mockups, tune the Risk Agent parameters, and generate the end-to-end demonstration.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================== Team ===================== -->
+    <div class="details-section">
+      <div class="container">
+        <hr class="divider--gradient">
+        <div class="section__header reveal">
+          <span class="badge badge--aws">Team</span>
+          <h2 class="section__title">The RADCloud Team</h2>
+          <p class="section__subtitle">Built by 4 engineers in 24 hours.</p>
+        </div>
+
+        <div class="team-grid">
+          <div class="team-card reveal">
+            <div class="team-card__avatar">AB</div>
+            <div class="team-card__name">Ahad</div>
+            <div class="team-card__role">AI Engineer</div>
+            <div class="team-card__focus">LLM integration, code generation, multi-agent architecture, Claude API</div>
+          </div>
+
+          <div class="team-card reveal">
+            <div class="team-card__avatar">AP</div>
+            <div class="team-card__name">Anjali</div>
+            <div class="team-card__role">Backend Engineer</div>
+            <div class="team-card__focus">Cloud orchestration, agent coordination, API integration, data pipeline</div>
+          </div>
+
+          <div class="team-card reveal">
+            <div class="team-card__avatar">DG</div>
+            <div class="team-card__name">Divisha</div>
+            <div class="team-card__role">Cloud Engineer</div>
+            <div class="team-card__focus">Cost optimization, infrastructure analysis, AWS pricing, compute right-sizing</div>
+          </div>
+
+          <div class="team-card reveal">
+            <div class="team-card__avatar">RG</div>
+            <div class="team-card__name">Ryan</div>
+            <div class="team-card__role">Frontend Developer</div>
+            <div class="team-card__focus">UI/UX design, dashboard visualization, website implementation</div>
+          </div>
+        </div>
+      </div>
     </div>
   </main>
 
@@ -57,9 +1065,10 @@
     <div class="container">
       <div class="footer__inner">
         <div class="footer__brand">
-          <div class="footer__brand-name">CloudShift</div>
+          <div class="footer__brand-name">RADCloud</div>
           <p class="footer__brand-desc">
-            AI-powered GCP-to-AWS migration accelerator and FinOps autopilot.
+            Migration-Native FinOps — One Unified AI OS for Cloud Transition.
+            Migrate smarter. Optimize from Day 0.
           </p>
           <div class="mt-lg">
             <span class="footer__hackathon">⚡ Built for Hack 'A' War</span>
@@ -69,47 +1078,196 @@
         <div class="footer__col">
           <div class="footer__heading">Navigation</div>
           <a href="index.html" class="footer__link">Home</a>
-          <a href="index.html#transition" class="footer__link">Our Solution</a>
-          <a href="index.html#service-mapping" class="footer__link">Service Mapping</a>
-          <a href="index.html#finops" class="footer__link">FinOps Autopilot</a>
-          <a href="details.html" class="footer__link">Technical Details</a>
+          <a href="index.html#transition" class="footer__link">Solution</a>
+          <a href="index.html#service-mapping" class="footer__link">Cross-Cloud Intelligence</a>
+          <a href="index.html#finops" class="footer__link">Watchdog Agent</a>
+          <a href="details.html" class="footer__link">Architecture</a>
         </div>
 
         <div class="footer__col">
-          <div class="footer__heading">Problem Statements</div>
-          <a href="index.html#hero" class="footer__link">GCP→AWS Migrator</a>
-          <a href="index.html#finops" class="footer__link">FinOps Autopilot</a>
-          <a href="index.html#aws-services" class="footer__link">AWS Services</a>
+          <div class="footer__heading">Core Features</div>
+          <a href="index.html#transition" class="footer__link">Parallel Migration + FinOps</a>
+          <a href="index.html#service-mapping" class="footer__link">AI Service Translation</a>
+          <a href="index.html#finops" class="footer__link">Day 0 Optimization</a>
+          <a href="index.html#aws-services" class="footer__link">Multi-Agent System</a>
         </div>
 
         <div class="footer__col">
-          <div class="footer__heading">Team ByteMyOps</div>
-          <div class="footer__team-member">
-            <div class="footer__member-avatar">RG</div>
-            <span class="footer__member-name">Ryan Gomez</span>
-          </div>
+          <div class="footer__heading">Team RADCloud</div>
           <div class="footer__team-member">
             <div class="footer__member-avatar">AB</div>
-            <span class="footer__member-name">Ahad Ulla Baig</span>
-          </div>
-          <div class="footer__team-member">
-            <div class="footer__member-avatar">DG</div>
-            <span class="footer__member-name">Divisha Gera</span>
+            <span class="footer__member-name">Ahad — AI Engineer</span>
           </div>
           <div class="footer__team-member">
             <div class="footer__member-avatar">AP</div>
-            <span class="footer__member-name">Anjali A Purohit</span>
+            <span class="footer__member-name">Anjali — Backend Engineer</span>
+          </div>
+          <div class="footer__team-member">
+            <div class="footer__member-avatar">DG</div>
+            <span class="footer__member-name">Divisha — Cloud Engineer</span>
+          </div>
+          <div class="footer__team-member">
+            <div class="footer__member-avatar">RG</div>
+            <span class="footer__member-name">Ryan — Frontend Dev</span>
           </div>
         </div>
       </div>
 
       <div class="footer__bottom">
-        <p class="footer__copyright">© 2026 ByteMyOps. Built with ❤️ for Hack 'A' War.</p>
-        <span class="footer__hackathon">🏆 Theme: Automating Ops Workflows</span>
+        <p class="footer__copyright">© 2026 RADCloud. Built with ♥ for Hack 'A' War.</p>
+        <span class="footer__hackathon">&#x1F3C6; Prototype built in 24 hours</span>
       </div>
     </div>
   </footer>
 
   <script src="js/main.js"></script>
+  <script>
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        var loader = document.getElementById('loader');
+        if (loader) {
+          loader.classList.add('loader--hidden');
+          setTimeout(function() { loader.remove(); }, 600);
+        }
+      }, 1500);
+    });
+  </script>
+
+  <script>
+    // ===== Typewriter Animation for Code Blocks =====
+    (function() {
+      var terraformLines = [
+        { text: '# Auto-generated by RADCloud', cls: 'cm' },
+        { text: '# GCP Cloud Run → AWS Lambda', cls: 'cm' },
+        { text: '' },
+        { text: 'resource', cls: 'kw', after: ' "aws_lambda_function" "api_handler" {', afterParts: [{text: '"aws_lambda_function"', cls:'str'}, {text: ' '}, {text: '"api_handler"', cls:'str'}, {text: ' {'}] },
+        { text: '  function_name = "radcloud-api"', parts: [{text:'  function_name = '}, {text:'"radcloud-api"', cls:'str'}] },
+        { text: '  runtime       = "python3.11"', parts: [{text:'  runtime       = '}, {text:'"python3.11"', cls:'str'}] },
+        { text: '  handler       = "main.handler"', parts: [{text:'  handler       = '}, {text:'"main.handler"', cls:'str'}] },
+        { text: '  memory_size   = 256  # Right-sized from 512', parts: [{text:'  memory_size   = '}, {text:'256', cls:'num'}, {text:'  '}, {text:'# Right-sized from 512', cls:'cm'}] },
+        { text: '  timeout       = 30', parts: [{text:'  timeout       = '}, {text:'30', cls:'num'}] },
+        { text: '' },
+        { text: '  # FinOps: Savings Plan pre-calculated', cls: 'cm' },
+        { text: '  tags = {' },
+        { text: '    cost_center  = "production"', parts: [{text:'    cost_center  = '}, {text:'"production"', cls:'str'}] },
+        { text: '    savings_plan = "compute-1yr"', parts: [{text:'    savings_plan = '}, {text:'"compute-1yr"', cls:'str'}] },
+        { text: '    managed_by   = "radcloud"', parts: [{text:'    managed_by   = '}, {text:'"radcloud"', cls:'str'}] },
+        { text: '  }' },
+        { text: '}' },
+        { text: '' },
+        { text: 'resource', cls: 'kw', after: ' "aws_lambda_function_url" "api" {', afterParts: [{text: '"aws_lambda_function_url"', cls:'str'}, {text: ' '}, {text: '"api"', cls:'str'}, {text: ' {'}] },
+        { text: '  function_name      = aws_lambda_function.api_handler.function_name' },
+        { text: '  authorization_type = "NONE"', parts: [{text:'  authorization_type = '}, {text:'"NONE"', cls:'str'}] },
+        { text: '}' }
+      ];
+
+      var finopsLines = [
+        { text: '# RADCloud Auto-Remediation', cls: 'cm' },
+        { text: '# Triggered by Watchdog Agent', cls: 'cm' },
+        { text: '' },
+        { text: 'Action:', cls: 'fn', after: ' Replace expiring GCP commitment' },
+        { text: 'Target:', cls: 'fn', after: ' prod-db-cluster (db.r5.xlarge)' },
+        { text: 'Fix:   ', cls: 'fn', after: ' Purchase 1yr AWS Reserved Instance' },
+        { text: '' },
+        { text: 'Before:', cls: 'fn', after: ' $1,690/mo (On-Demand)' },
+        { text: 'After: ', cls: 'fn', after: ' $1,170/mo (Reserved)' },
+        { text: 'Savings:', cls: 'fn', after: ' ', afterParts: [{text:'$520/mo ($6,240/yr)', cls:'num'}] },
+        { text: '' },
+        { text: 'Action:', cls: 'fn', after: ' Right-size compute' },
+        { text: 'Target:', cls: 'fn', after: ' 9x m5.xlarge instances' },
+        { text: 'Fix:   ', cls: 'fn', after: ' Downsize to m5.large' },
+        { text: '' },
+        { text: 'Before:', cls: 'fn', after: ' $2,950/mo' },
+        { text: 'After: ', cls: 'fn', after: ' $2,110/mo' },
+        { text: 'Savings:', cls: 'fn', after: ' ', afterParts: [{text:'$840/mo ($10,080/yr)', cls:'num'}] },
+        { text: '' },
+        { text: 'Status:', cls: 'fn', after: ' ', afterParts: [{text:'APPLIED ✓', cls:'str'}] }
+      ];
+
+      function buildLineHTML(line) {
+        if (!line.text && !line.cls) return '';
+        if (line.parts) {
+          return line.parts.map(function(p) {
+            return p.cls ? '<span class="' + p.cls + '">' + escapeHTML(p.text) + '</span>' : escapeHTML(p.text);
+          }).join('');
+        }
+        var html = '';
+        if (line.cls) {
+          html += '<span class="' + line.cls + '">' + escapeHTML(line.text) + '</span>';
+        } else {
+          html += escapeHTML(line.text);
+        }
+        if (line.after) {
+          if (line.afterParts) {
+            html += escapeHTML(line.after.substring(0, 1));
+            html += line.afterParts.map(function(p) {
+              return p.cls ? '<span class="' + p.cls + '">' + escapeHTML(p.text) + '</span>' : escapeHTML(p.text);
+            }).join('');
+          } else {
+            html += escapeHTML(line.after);
+          }
+        }
+        return html;
+      }
+
+      function escapeHTML(s) {
+        return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+      }
+
+      function typewriterAnimate(elementId, lines, statusId, delay) {
+        var el = document.getElementById(elementId);
+        var statusEl = document.getElementById(statusId);
+        if (!el) return;
+        el.innerHTML = '<span class="typewriter-cursor">█</span>';
+        var lineIndex = 0;
+        var lineDelay = delay || 80;
+
+        function typeLine() {
+          if (lineIndex >= lines.length) {
+            // Remove cursor, update status
+            el.innerHTML = el.innerHTML.replace('<span class="typewriter-cursor">█</span>', '');
+            if (statusEl) {
+              statusEl.className = 'output-panel__status output-panel__status--complete';
+              statusEl.innerHTML = '<span class="status-dot status-dot--done"></span> Complete';
+            }
+            return;
+          }
+          var line = lines[lineIndex];
+          var html = el.innerHTML.replace('<span class="typewriter-cursor">█</span>', '');
+          html += buildLineHTML(line) + '\n';
+          html += '<span class="typewriter-cursor">█</span>';
+          el.innerHTML = html;
+          el.scrollTop = el.scrollHeight;
+          lineIndex++;
+          setTimeout(typeLine, line.text === '' ? lineDelay * 0.4 : lineDelay);
+        }
+
+        setTimeout(typeLine, 400);
+      }
+
+      // Use IntersectionObserver to trigger when panels come into view
+      var observed = { terraform: false, finops: false };
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            var id = entry.target.id;
+            if (id === 'terraform-code' && !observed.terraform) {
+              observed.terraform = true;
+              typewriterAnimate('terraform-code', terraformLines, 'terraform-status', 70);
+            }
+            if (id === 'finops-code' && !observed.finops) {
+              observed.finops = true;
+              typewriterAnimate('finops-code', finopsLines, 'finops-status', 65);
+            }
+          }
+        });
+      }, { threshold: 0.3 });
+
+      var tf = document.getElementById('terraform-code');
+      var fo = document.getElementById('finops-code');
+      if (tf) observer.observe(tf);
+      if (fo) observer.observe(fo);
+    })();
+  </script>
 </body>
 </html>
