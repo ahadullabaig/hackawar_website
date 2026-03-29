@@ -383,13 +383,87 @@
     </div>
   </section>
 
-  <!-- ===================== How It Works Pipeline ===================== -->
   <section class="section section--pipeline" id="pipeline" data-phase="aws">
     <div class="container">
-      <div class="section__header">
+      <div class="section__header reveal">
         <span class="badge badge--aws">How It Works</span>
         <h2 class="section__title">The Migration Pipeline</h2>
         <p class="section__subtitle">Four steps from GCP architecture to AWS deployment.</p>
+      </div>
+
+      <div class="pipeline">
+        <!-- Step 1 -->
+        <div class="pipeline__step reveal" style="transition-delay: 0s">
+          <div class="pipeline__step-number">01</div>
+          <div class="pipeline__step-icon">📥</div>
+          <h3 class="pipeline__step-title">Ingest</h3>
+          <p class="pipeline__step-desc">CloudShift scans your entire GCP infrastructure and maps every resource, dependency, and configuration.</p>
+          <ul class="pipeline__step-list">
+            <li>IAM policies & roles</li>
+            <li>Networking & VPCs</li>
+            <li>Compute & storage</li>
+          </ul>
+        </div>
+
+        <!-- Flow arrow -->
+        <div class="pipeline__arrow reveal reveal--scale" style="transition-delay: 0.1s">
+          <svg viewBox="0 0 40 24" class="pipeline__arrow-svg">
+            <path d="M 0 12 L 30 12 M 24 6 L 30 12 L 24 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="pipeline__step reveal" style="transition-delay: 0.15s">
+          <div class="pipeline__step-number">02</div>
+          <div class="pipeline__step-icon">🔍</div>
+          <h3 class="pipeline__step-title">Analyze</h3>
+          <p class="pipeline__step-desc">AI-powered analysis identifies service equivalencies, compatibility gaps, and migration complexity.</p>
+          <ul class="pipeline__step-list">
+            <li>Service compatibility</li>
+            <li>API equivalencies</li>
+            <li>Data format mapping</li>
+          </ul>
+        </div>
+
+        <!-- Flow arrow -->
+        <div class="pipeline__arrow reveal reveal--scale" style="transition-delay: 0.25s">
+          <svg viewBox="0 0 40 24" class="pipeline__arrow-svg">
+            <path d="M 0 12 L 30 12 M 24 6 L 30 12 L 24 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="pipeline__step reveal" style="transition-delay: 0.3s">
+          <div class="pipeline__step-number">03</div>
+          <div class="pipeline__step-icon">⚖️</div>
+          <h3 class="pipeline__step-title">Assess</h3>
+          <p class="pipeline__step-desc">Risk scoring produces a confidence-ranked migration plan with cost projections and rollback strategies.</p>
+          <ul class="pipeline__step-list">
+            <li>Risk & confidence scores</li>
+            <li>Cost delta analysis</li>
+            <li>Rollback blueprints</li>
+          </ul>
+        </div>
+
+        <!-- Flow arrow -->
+        <div class="pipeline__arrow reveal reveal--scale" style="transition-delay: 0.4s">
+          <svg viewBox="0 0 40 24" class="pipeline__arrow-svg">
+            <path d="M 0 12 L 30 12 M 24 6 L 30 12 L 24 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="pipeline__step reveal" style="transition-delay: 0.45s">
+          <div class="pipeline__step-number">04</div>
+          <div class="pipeline__step-icon">🚀</div>
+          <h3 class="pipeline__step-title">Generate</h3>
+          <p class="pipeline__step-desc">Outputs production-ready IaC templates, migration scripts, and a FinOps monitoring dashboard.</p>
+          <ul class="pipeline__step-list">
+            <li>Terraform / CloudFormation</li>
+            <li>Migration runbooks</li>
+            <li>FinOps autopilot setup</li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
@@ -397,10 +471,103 @@
   <!-- ===================== Cost Comparison ===================== -->
   <section class="section section--cost" id="cost-comparison" data-phase="aws">
     <div class="container">
-      <div class="section__header">
+      <div class="section__header reveal">
         <span class="badge badge--aws">Cost Analysis</span>
         <h2 class="section__title">Migration Risk &amp; Cost Comparison</h2>
         <p class="section__subtitle">Transparent cost estimation and risk assessment before you migrate.</p>
+      </div>
+
+      <!-- Cost comparison cards -->
+      <div class="cost-compare">
+        <div class="cost-card cost-card--gcp reveal reveal--left" style="transition-delay: 0s">
+          <div class="cost-card__header">
+            <span class="cost-card__provider">☁️ Google Cloud</span>
+            <span class="cost-card__label">Current Spend</span>
+          </div>
+          <div class="cost-card__rows">
+            <div class="cost-card__row">
+              <span>Compute Engine</span>
+              <span class="cost-card__amount" data-target="4280">$0</span>
+            </div>
+            <div class="cost-card__row">
+              <span>Cloud Storage</span>
+              <span class="cost-card__amount" data-target="1850">$0</span>
+            </div>
+            <div class="cost-card__row">
+              <span>Cloud SQL</span>
+              <span class="cost-card__amount" data-target="2340">$0</span>
+            </div>
+            <div class="cost-card__row">
+              <span>Networking</span>
+              <span class="cost-card__amount" data-target="960">$0</span>
+            </div>
+          </div>
+          <div class="cost-card__total">
+            <span>Monthly Total</span>
+            <span class="cost-card__amount cost-card__amount--total" data-target="9430">$0</span>
+          </div>
+        </div>
+
+        <!-- Savings callout -->
+        <div class="cost-savings reveal reveal--scale" style="transition-delay: 0.15s">
+          <div class="cost-savings__arrow">→</div>
+          <div class="cost-savings__badge">
+            <span class="cost-savings__percent" data-target="31">0</span>
+            <span class="cost-savings__label">% savings</span>
+          </div>
+          <div class="cost-savings__sub">$2,924/mo saved</div>
+        </div>
+
+        <div class="cost-card cost-card--aws reveal reveal--right" style="transition-delay: 0.1s">
+          <div class="cost-card__header">
+            <span class="cost-card__provider">⚡ Amazon Web Services</span>
+            <span class="cost-card__label">Projected Spend</span>
+          </div>
+          <div class="cost-card__rows">
+            <div class="cost-card__row">
+              <span>Amazon EC2</span>
+              <span class="cost-card__amount" data-target="2950">$0</span>
+            </div>
+            <div class="cost-card__row">
+              <span>Amazon S3</span>
+              <span class="cost-card__amount" data-target="1280">$0</span>
+            </div>
+            <div class="cost-card__row">
+              <span>Amazon RDS</span>
+              <span class="cost-card__amount" data-target="1690">$0</span>
+            </div>
+            <div class="cost-card__row">
+              <span>Networking</span>
+              <span class="cost-card__amount" data-target="586">$0</span>
+            </div>
+          </div>
+          <div class="cost-card__total">
+            <span>Monthly Total</span>
+            <span class="cost-card__amount cost-card__amount--total cost-card__amount--savings" data-target="6506">$0</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Risk assessment -->
+      <div class="risk-grid">
+        <div class="risk-card reveal" style="transition-delay: 0.2s">
+          <div class="risk-card__indicator risk-card__indicator--medium"></div>
+          <h4 class="risk-card__title">Migration Complexity</h4>
+          <span class="risk-card__value risk-card__value--medium">Medium</span>
+          <p class="risk-card__desc">6 services to migrate with 2 requiring manual configuration adjustments.</p>
+        </div>
+        <div class="risk-card reveal" style="transition-delay: 0.3s">
+          <div class="risk-card__indicator risk-card__indicator--low"></div>
+          <h4 class="risk-card__title">Data Loss Risk</h4>
+          <span class="risk-card__value risk-card__value--low">Low</span>
+          <p class="risk-card__desc">All storage formats are natively compatible. Zero-downtime data sync available.</p>
+        </div>
+        <div class="risk-card reveal" style="transition-delay: 0.4s">
+          <div class="risk-card__indicator risk-card__indicator--low"></div>
+          <h4 class="risk-card__title">Downtime Estimate</h4>
+          <span class="risk-card__value risk-card__value--low">Minimal</span>
+          <p class="risk-card__desc">Blue-green deployment strategy limits downtime to under 4 minutes.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -419,10 +586,25 @@
   <!-- ===================== Runbook Terminal ===================== -->
   <section class="section section--terminal" id="terminal" data-phase="aws">
     <div class="container">
-      <div class="section__header">
+      <div class="section__header reveal">
         <span class="badge badge--aws">Migration Runbook</span>
         <h2 class="section__title">Auto-Generated Runbooks</h2>
         <p class="section__subtitle">Step-by-step migration instructions, generated by AI.</p>
+      </div>
+
+      <div class="terminal reveal" id="runbook-terminal">
+        <div class="terminal__chrome">
+          <div class="terminal__dots">
+            <span class="terminal__dot terminal__dot--red"></span>
+            <span class="terminal__dot terminal__dot--yellow"></span>
+            <span class="terminal__dot terminal__dot--green"></span>
+          </div>
+          <span class="terminal__title">cloudshift-runbook.sh — bash</span>
+        </div>
+        <div class="terminal__body">
+          <pre class="terminal__output" id="terminal-output"></pre>
+          <span class="terminal__cursor" id="terminal-cursor">█</span>
+        </div>
       </div>
     </div>
   </section>
@@ -430,10 +612,68 @@
   <!-- ===================== AWS Services ===================== -->
   <section class="section section--services" id="aws-services" data-phase="aws">
     <div class="container">
-      <div class="section__header">
+      <div class="section__header reveal">
         <span class="badge badge--aws">Tech Stack</span>
         <h2 class="section__title">Powered by AWS</h2>
         <p class="section__subtitle">The AWS services that make CloudShift possible.</p>
+      </div>
+
+      <div class="services-grid">
+        <div class="service-card reveal" style="transition-delay: 0s">
+          <div class="service-card__icon">🧠</div>
+          <h4 class="service-card__name">Amazon Bedrock</h4>
+          <p class="service-card__desc">Foundation models for AI-powered infrastructure analysis and code generation.</p>
+          <span class="service-card__tag">AI Engine</span>
+        </div>
+
+        <div class="service-card reveal" style="transition-delay: 0.06s">
+          <div class="service-card__icon">⚡</div>
+          <h4 class="service-card__name">AWS Lambda</h4>
+          <p class="service-card__desc">Serverless compute for running migration analysis and transformation logic.</p>
+          <span class="service-card__tag">Compute</span>
+        </div>
+
+        <div class="service-card reveal" style="transition-delay: 0.12s">
+          <div class="service-card__icon">🪣</div>
+          <h4 class="service-card__name">Amazon S3</h4>
+          <p class="service-card__desc">Stores migration artifacts, IaC templates, and generated runbook outputs.</p>
+          <span class="service-card__tag">Storage</span>
+        </div>
+
+        <div class="service-card reveal" style="transition-delay: 0.18s">
+          <div class="service-card__icon">🗃️</div>
+          <h4 class="service-card__name">Amazon DynamoDB</h4>
+          <p class="service-card__desc">NoSQL database tracking service mappings, risk scores, and migration state.</p>
+          <span class="service-card__tag">Database</span>
+        </div>
+
+        <div class="service-card reveal" style="transition-delay: 0.24s">
+          <div class="service-card__icon">🔄</div>
+          <h4 class="service-card__name">AWS Step Functions</h4>
+          <p class="service-card__desc">Orchestrates the 4-stage migration pipeline from ingestion to deployment.</p>
+          <span class="service-card__tag">Orchestration</span>
+        </div>
+
+        <div class="service-card reveal" style="transition-delay: 0.3s">
+          <div class="service-card__icon">📊</div>
+          <h4 class="service-card__name">Amazon CloudWatch</h4>
+          <p class="service-card__desc">Monitors migration health, cost metrics, and FinOps autopilot dashboards.</p>
+          <span class="service-card__tag">Monitoring</span>
+        </div>
+
+        <div class="service-card reveal" style="transition-delay: 0.36s">
+          <div class="service-card__icon">🔐</div>
+          <h4 class="service-card__name">AWS IAM</h4>
+          <p class="service-card__desc">Manages least-privilege access policies for cross-cloud resource access.</p>
+          <span class="service-card__tag">Security</span>
+        </div>
+
+        <div class="service-card reveal" style="transition-delay: 0.42s">
+          <div class="service-card__icon">🏗️</div>
+          <h4 class="service-card__name">AWS CloudFormation</h4>
+          <p class="service-card__desc">Provisions target AWS infrastructure using auto-generated IaC templates.</p>
+          <span class="service-card__tag">Infrastructure</span>
+        </div>
       </div>
     </div>
   </section>

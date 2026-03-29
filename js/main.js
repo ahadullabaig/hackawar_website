@@ -108,6 +108,175 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   reveals.forEach(el => observer.observe(el));
 })();
 
+// -------------------- Animated Number Counters --------------------
+(function() {
+  const counters = document.querySelectorAll('[data-target]');
+  if (!counters.length) return;
+
+  const easeOutExpo = t => t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+
+  function animateCounter(el) {
+    const target = parseInt(el.dataset.target, 10);
+    if (isNaN(target)) return;
+    const duration = 1500;
+    const start = performance.now();
+    const prefix = el.textContent.startsWith('$') ? '$' : '';
+
+    function tick(now) {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const value = Math.round(easeOutExpo(progress) * target);
+      el.textContent = prefix + value.toLocaleString('en-US');
+      if (progress < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCounter(entry.target);
+        counterObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  counters.forEach(el => counterObserver.observe(el));
+})();
+
+// -------------------- Typewriter Terminal --------------------
+(function() {
+  const output = document.getElementById('terminal-output');
+  const cursor = document.getElementById('terminal-cursor');
+  const terminal = document.getElementById('runbook-terminal');
+  if (!output || !cursor || !terminal) return;
+
+  const lines = [
+    { type: 'comment', text: '# CloudShift Migration Runbook — Auto-Generated' },
+    { type: 'comment', text: '# Target: GCP → AWS  |  Confidence: 94.2%' },
+    { type: 'blank' },
+    { type: 'command', text: 'cloudshift scan --source gcp --project my-app-prod' },
+    { type: 'output', text: '  ✓ Scanning IAM policies...          23 roles found' },
+    { type: 'output', text: '  ✓ Scanning Compute Engine...         8 instances' },
+    { type: 'output', text: '  ✓ Scanning Cloud Storage...          12 buckets' },
+    { type: 'output', text: '  ✓ Scanning Cloud SQL...              3 databases' },
+    { type: 'output', text: '  ✓ Scanning VPC networks...           2 VPCs mapped' },
+    { type: 'blank' },
+    { type: 'command', text: 'cloudshift analyze --compatibility' },
+    { type: 'output', text: '  → Compute Engine  →  EC2          98% compatible' },
+    { type: 'output', text: '  → Cloud Storage   →  S3           99% compatible' },
+    { type: 'output', text: '  → Cloud SQL       →  RDS          95% compatible' },
+    { type: 'output', text: '  → Cloud Functions →  Lambda       92% compatible' },
+    { type: 'blank' },
+    { type: 'command', text: 'cloudshift generate --output terraform --format hcl' },
+    { type: 'output', text: '  ✓ Generated main.tf              (142 resources)' },
+    { type: 'output', text: '  ✓ Generated variables.tf         (38 variables)' },
+    { type: 'output', text: '  ✓ Generated migration-runbook.md (24 steps)' },
+    { type: 'blank' },
+    { type: 'command', text: 'cloudshift deploy --strategy blue-green --dry-run' },
+    { type: 'output', text: '  ✓ Estimated downtime: < 4 minutes' },
+    { type: 'output', text: '  ✓ Projected savings: $2,924/mo (31%)' },
+    { type: 'output', text: '  ✓ Rollback plan: auto-configured' },
+    { type: 'blank' },
+    { type: 'success', text: '  ★ Migration plan ready — run `cloudshift deploy --execute`' },
+  ];
+
+  let hasTyped = false;
+
+  function typeChar(text, el, i, cb) {
+    if (i < text.length) {
+      el.textContent += text[i];
+      scrollToBottom();
+      setTimeout(() => typeChar(text, el, i + 1, cb), 25 + Math.random() * 15);
+    } else {
+      cb();
+    }
+  }
+
+  function scrollToBottom() {
+    const body = terminal.querySelector('.terminal__body');
+    if (body) body.scrollTop = body.scrollHeight;
+  }
+
+  function processLine(idx) {
+    if (idx >= lines.length) {
+      cursor.style.display = 'none';
+      return;
+    }
+
+    const line = lines[idx];
+
+    if (line.type === 'blank') {
+      output.textContent += '\n';
+      scrollToBottom();
+      setTimeout(() => processLine(idx + 1), 200);
+      return;
+    }
+
+    if (line.type === 'comment') {
+      const span = document.createElement('span');
+      span.className = 't-muted';
+      span.textContent = line.text;
+      output.appendChild(span);
+      output.appendChild(document.createTextNode('\n'));
+      scrollToBottom();
+      setTimeout(() => processLine(idx + 1), 300);
+      return;
+    }
+
+    if (line.type === 'command') {
+      const prefix = document.createElement('span');
+      prefix.className = 't-green';
+      prefix.textContent = '$ ';
+      output.appendChild(prefix);
+
+      const cmdSpan = document.createElement('span');
+      cmdSpan.className = 't-bold';
+      output.appendChild(cmdSpan);
+
+      typeChar(line.text, cmdSpan, 0, () => {
+        output.appendChild(document.createTextNode('\n'));
+        scrollToBottom();
+        setTimeout(() => processLine(idx + 1), 400);
+      });
+      return;
+    }
+
+    if (line.type === 'output') {
+      const span = document.createElement('span');
+      span.textContent = line.text;
+      output.appendChild(span);
+      output.appendChild(document.createTextNode('\n'));
+      scrollToBottom();
+      setTimeout(() => processLine(idx + 1), 80);
+      return;
+    }
+
+    if (line.type === 'success') {
+      const span = document.createElement('span');
+      span.className = 't-green t-bold';
+      span.textContent = line.text;
+      output.appendChild(span);
+      output.appendChild(document.createTextNode('\n'));
+      scrollToBottom();
+      setTimeout(() => processLine(idx + 1), 200);
+      return;
+    }
+  }
+
+  const termObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !hasTyped) {
+        hasTyped = true;
+        processLine(0);
+        termObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  termObserver.observe(terminal);
+})();
+
 // -------------------- Scroll-Driven Color Transition Engine (Tasks 5a–5d) --------------------
 (function() {
   'use strict';
