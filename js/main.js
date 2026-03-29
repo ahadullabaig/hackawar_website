@@ -102,7 +102,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
   }, {
     threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
+    rootMargin: '0px 0px -60px 0px'
   });
 
   reveals.forEach(el => observer.observe(el));
@@ -118,7 +118,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   function animateCounter(el) {
     const target = parseInt(el.dataset.target, 10);
     if (isNaN(target)) return;
-    const duration = 1500;
+    const duration = 1200;
     const start = performance.now();
     const prefix = el.textContent.startsWith('$') ? '$' : '';
 
@@ -155,7 +155,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     const target = parseInt(el.dataset.counterTarget, 10);
     if (isNaN(target)) return;
     const prefix = el.dataset.counterPrefix || '';
-    const duration = 1800;
+    const duration = 1200;
     const start = performance.now();
 
     function tick(now) {
@@ -484,7 +484,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         responsive: true,
         maintainAspectRatio: false,
         animation: {
-          duration: 1400,
+          duration: 1200,
           easing: 'easeOutQuart',
         },
         interaction: {
