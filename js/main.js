@@ -144,6 +144,42 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   counters.forEach(el => counterObserver.observe(el));
 })();
 
+// -------------------- Savings Aggregator Counters --------------------
+(function() {
+  const savingsEls = document.querySelectorAll('[data-counter-target]');
+  if (!savingsEls.length) return;
+
+  const easeOutExpo = t => t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+
+  function animateSavings(el) {
+    const target = parseInt(el.dataset.counterTarget, 10);
+    if (isNaN(target)) return;
+    const prefix = el.dataset.counterPrefix || '';
+    const duration = 1800;
+    const start = performance.now();
+
+    function tick(now) {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const value = Math.round(easeOutExpo(progress) * target);
+      el.textContent = prefix + value.toLocaleString('en-US');
+      if (progress < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  const savingsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateSavings(entry.target);
+        savingsObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  savingsEls.forEach(el => savingsObserver.observe(el));
+})();
+
 // -------------------- Typewriter Terminal --------------------
 (function() {
   const output = document.getElementById('terminal-output');
@@ -275,6 +311,321 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   }, { threshold: 0.3 });
 
   termObserver.observe(terminal);
+})();
+
+// -------------------- FinOps Donut Chart (Chart.js) --------------------
+(function() {
+  const canvas = document.getElementById('spend-donut');
+  if (!canvas || typeof Chart === 'undefined') return;
+
+  let chartCreated = false;
+
+  const chartObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !chartCreated) {
+        chartCreated = true;
+        createDonutChart();
+        chartObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  chartObserver.observe(canvas);
+
+  function createDonutChart() {
+    const ctx = canvas.getContext('2d');
+
+    const colors = {
+      bg: ['rgba(88,166,255,0.85)', 'rgba(63,185,80,0.85)', 'rgba(240,136,62,0.85)', 'rgba(188,140,255,0.85)'],
+      border: ['#58a6ff', '#3fb950', '#f0883e', '#bc8cff'],
+      hoverBg: ['rgba(88,166,255,1)', 'rgba(63,185,80,1)', 'rgba(240,136,62,1)', 'rgba(188,140,255,1)'],
+    };
+
+    new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: ['Amazon EC2', 'Amazon S3', 'Amazon RDS', 'Other'],
+        datasets: [{
+          data: [2950, 1280, 1690, 586],
+          backgroundColor: colors.bg,
+          borderColor: colors.border,
+          borderWidth: 2,
+          hoverBackgroundColor: colors.hoverBg,
+          hoverBorderWidth: 3,
+          hoverOffset: 8,
+          spacing: 3,
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        cutout: '68%',
+        radius: '90%',
+        animation: {
+          animateRotate: true,
+          animateScale: true,
+          duration: 1200,
+          easing: 'easeOutQuart',
+        },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            backgroundColor: 'rgba(13,17,23,0.95)',
+            titleFont: { family: "'JetBrains Mono', monospace", size: 12, weight: '600' },
+            bodyFont: { family: "'JetBrains Mono', monospace", size: 11 },
+            titleColor: '#f0f6fc',
+            bodyColor: '#c9d1d9',
+            borderColor: 'rgba(255,255,255,0.1)',
+            borderWidth: 1,
+            cornerRadius: 8,
+            padding: 12,
+            displayColors: true,
+            boxWidth: 10,
+            boxHeight: 10,
+            boxPadding: 4,
+            callbacks: {
+              label: function(context) {
+                const val = context.parsed;
+                const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                const pct = ((val / total) * 100).toFixed(1);
+                return ' $' + val.toLocaleString('en-US') + ' (' + pct + '%)';
+              }
+            }
+          }
+        },
+        layout: { padding: 4 },
+      }
+    });
+  }
+})();
+
+// -------------------- FinOps Line Chart + Bar Chart --------------------
+(function() {
+  if (typeof Chart === 'undefined') return;
+
+  // Shared Chart.js defaults for dark theme
+  const darkGrid = { color: 'rgba(255,255,255,0.06)', drawBorder: false };
+  const darkTicks = { color: '#6e7681', font: { family: "'JetBrains Mono', monospace", size: 10 } };
+  const darkTooltip = {
+    backgroundColor: 'rgba(13,17,23,0.95)',
+    titleFont: { family: "'JetBrains Mono', monospace", size: 12, weight: '600' },
+    bodyFont: { family: "'JetBrains Mono', monospace", size: 11 },
+    titleColor: '#f0f6fc',
+    bodyColor: '#c9d1d9',
+    borderColor: 'rgba(255,255,255,0.1)',
+    borderWidth: 1,
+    cornerRadius: 8,
+    padding: 12,
+    displayColors: true,
+    boxWidth: 10,
+    boxHeight: 10,
+    boxPadding: 4,
+  };
+
+  // ========== LINE CHART ==========
+  const lineCanvas = document.getElementById('cost-trend-line');
+  if (lineCanvas) {
+    let lineCreated = false;
+    const lineObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting && !lineCreated) {
+          lineCreated = true;
+          createLineChart();
+          lineObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    lineObs.observe(lineCanvas);
+  }
+
+  function createLineChart() {
+    const ctx = lineCanvas.getContext('2d');
+
+    // Gradient fill for AWS line
+    const gradient = ctx.createLinearGradient(0, 0, 0, 280);
+    gradient.addColorStop(0, 'rgba(0,200,83,0.2)');
+    gradient.addColorStop(1, 'rgba(0,200,83,0)');
+
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+        datasets: [
+          {
+            label: 'GCP Baseline',
+            data: [9430, 9430, 9430, 9430, 9430, 9430],
+            borderColor: 'rgba(88,166,255,0.6)',
+            borderWidth: 2,
+            borderDash: [6, 4],
+            pointRadius: 0,
+            pointHoverRadius: 4,
+            pointHoverBackgroundColor: '#58a6ff',
+            tension: 0,
+            fill: false,
+          },
+          {
+            label: 'AWS + FinOps',
+            data: [7200, 6800, 6300, 5800, 5400, 5100],
+            borderColor: '#3fb950',
+            borderWidth: 2.5,
+            pointRadius: 4,
+            pointBackgroundColor: '#0d1117',
+            pointBorderColor: '#3fb950',
+            pointBorderWidth: 2,
+            pointHoverRadius: 6,
+            pointHoverBackgroundColor: '#3fb950',
+            tension: 0.35,
+            fill: true,
+            backgroundColor: gradient,
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        animation: {
+          duration: 1400,
+          easing: 'easeOutQuart',
+        },
+        interaction: {
+          mode: 'index',
+          intersect: false,
+        },
+        scales: {
+          x: {
+            grid: { ...darkGrid, display: false },
+            ticks: darkTicks,
+            border: { display: false },
+          },
+          y: {
+            grid: darkGrid,
+            ticks: {
+              ...darkTicks,
+              callback: v => '$' + (v / 1000).toFixed(1) + 'k',
+            },
+            border: { display: false },
+            min: 4000,
+            max: 10500,
+          }
+        },
+        plugins: {
+          legend: {
+            display: true,
+            position: 'bottom',
+            labels: {
+              color: '#c9d1d9',
+              font: { family: "'JetBrains Mono', monospace", size: 10 },
+              boxWidth: 12,
+              boxHeight: 2,
+              padding: 16,
+              usePointStyle: false,
+            }
+          },
+          tooltip: {
+            ...darkTooltip,
+            callbacks: {
+              label: ctx => ' ' + ctx.dataset.label + ': $' + ctx.parsed.y.toLocaleString('en-US'),
+            }
+          }
+        },
+        layout: { padding: { top: 4, right: 8 } },
+      }
+    });
+  }
+
+  // ========== BAR CHART ==========
+  const barCanvas = document.getElementById('cost-compare-bar');
+  if (barCanvas) {
+    let barCreated = false;
+    const barObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting && !barCreated) {
+          barCreated = true;
+          createBarChart();
+          barObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    barObs.observe(barCanvas);
+  }
+
+  function createBarChart() {
+    const ctx = barCanvas.getContext('2d');
+
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Compute', 'Storage', 'Database', 'Networking'],
+        datasets: [
+          {
+            label: 'GCP (Before)',
+            data: [4280, 1850, 2340, 960],
+            backgroundColor: 'rgba(88,166,255,0.7)',
+            borderColor: '#58a6ff',
+            borderWidth: 1,
+            borderRadius: 4,
+            barPercentage: 0.7,
+            categoryPercentage: 0.65,
+          },
+          {
+            label: 'AWS (After)',
+            data: [2950, 1280, 1690, 586],
+            backgroundColor: 'rgba(63,185,80,0.7)',
+            borderColor: '#3fb950',
+            borderWidth: 1,
+            borderRadius: 4,
+            barPercentage: 0.7,
+            categoryPercentage: 0.65,
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        indexAxis: 'y',
+        animation: {
+          duration: 1200,
+          easing: 'easeOutQuart',
+        },
+        scales: {
+          x: {
+            grid: darkGrid,
+            ticks: {
+              ...darkTicks,
+              callback: v => '$' + (v / 1000).toFixed(1) + 'k',
+            },
+            border: { display: false },
+          },
+          y: {
+            grid: { ...darkGrid, display: false },
+            ticks: darkTicks,
+            border: { display: false },
+          }
+        },
+        plugins: {
+          legend: {
+            display: true,
+            position: 'bottom',
+            labels: {
+              color: '#c9d1d9',
+              font: { family: "'JetBrains Mono', monospace", size: 10 },
+              boxWidth: 12,
+              boxHeight: 12,
+              padding: 16,
+              usePointStyle: false,
+            }
+          },
+          tooltip: {
+            ...darkTooltip,
+            callbacks: {
+              label: ctx => ' ' + ctx.dataset.label + ': $' + ctx.parsed.x.toLocaleString('en-US'),
+            }
+          }
+        },
+        layout: { padding: { top: 4 } },
+      }
+    });
+  }
 })();
 
 // -------------------- Scroll-Driven Color Transition Engine (Tasks 5a–5d) --------------------

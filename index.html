@@ -575,10 +575,246 @@
   <!-- ===================== FinOps Autopilot ===================== -->
   <section class="section section--finops" id="finops" data-phase="finops">
     <div class="container">
-      <div class="section__header">
+      <div class="section__header reveal">
         <span class="badge badge--finops">FinOps Autopilot</span>
         <h2 class="section__title">Once You're on AWS, We Keep Optimizing</h2>
         <p class="section__subtitle">Continuous cloud cost optimization powered by AI.</p>
+      </div>
+
+      <div class="finops-dashboard reveal" style="transition-delay: 0.1s">
+        <!-- Left: Donut Chart -->
+        <div class="finops-chart-panel">
+          <h3 class="finops-panel__title">Monthly Spend by Service</h3>
+          <div class="finops-chart-wrap">
+            <canvas id="spend-donut" width="280" height="280"></canvas>
+            <div class="finops-chart-center">
+              <span class="finops-chart-center__amount">$6,506</span>
+              <span class="finops-chart-center__label">Total / mo</span>
+            </div>
+          </div>
+          <div class="finops-legend">
+            <div class="finops-legend__item">
+              <span class="finops-legend__dot" style="background: #58a6ff"></span>
+              <span class="finops-legend__name">EC2</span>
+              <span class="finops-legend__val">$2,950</span>
+            </div>
+            <div class="finops-legend__item">
+              <span class="finops-legend__dot" style="background: #3fb950"></span>
+              <span class="finops-legend__name">S3</span>
+              <span class="finops-legend__val">$1,280</span>
+            </div>
+            <div class="finops-legend__item">
+              <span class="finops-legend__dot" style="background: #f0883e"></span>
+              <span class="finops-legend__name">RDS</span>
+              <span class="finops-legend__val">$1,690</span>
+            </div>
+            <div class="finops-legend__item">
+              <span class="finops-legend__dot" style="background: #bc8cff"></span>
+              <span class="finops-legend__name">Other</span>
+              <span class="finops-legend__val">$586</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: KPI Summary -->
+        <div class="finops-kpi-panel">
+          <h3 class="finops-panel__title">Optimization Summary</h3>
+          <div class="finops-kpis">
+            <div class="finops-kpi">
+              <div class="finops-kpi__icon">💰</div>
+              <div class="finops-kpi__body">
+                <span class="finops-kpi__value" data-target="6506">$0</span>
+                <span class="finops-kpi__label">Monthly AWS Spend</span>
+              </div>
+            </div>
+            <div class="finops-kpi">
+              <div class="finops-kpi__icon">📉</div>
+              <div class="finops-kpi__body">
+                <span class="finops-kpi__value finops-kpi__value--green" data-target="2924">$0</span>
+                <span class="finops-kpi__label">Savings Identified</span>
+              </div>
+            </div>
+            <div class="finops-kpi">
+              <div class="finops-kpi__icon">⚡</div>
+              <div class="finops-kpi__body">
+                <span class="finops-kpi__value finops-kpi__value--green" data-target="94">0</span>
+                <span class="finops-kpi__label">Resources Optimized (%)</span>
+              </div>
+            </div>
+            <div class="finops-kpi">
+              <div class="finops-kpi__icon">🤖</div>
+              <div class="finops-kpi__body">
+                <span class="finops-kpi__value" data-target="12">0</span>
+                <span class="finops-kpi__label">Active Auto-Rules</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Charts Row: Line + Bar -->
+      <div class="finops-charts-row">
+        <div class="finops-chart-card reveal" style="transition-delay: 0.1s">
+          <h3 class="finops-panel__title">Cost Trend — 6 Month Projection</h3>
+          <p class="finops-chart-card__sub">Projected savings after CloudShift migration and FinOps autopilot.</p>
+          <div class="finops-chart-canvas-wrap finops-chart-canvas-wrap--line">
+            <canvas id="cost-trend-line"></canvas>
+          </div>
+        </div>
+        <div class="finops-chart-card reveal" style="transition-delay: 0.2s">
+          <h3 class="finops-panel__title">Before vs After — By Service</h3>
+          <p class="finops-chart-card__sub">Per-service cost comparison: GCP current vs AWS optimized.</p>
+          <div class="finops-chart-canvas-wrap finops-chart-canvas-wrap--bar">
+            <canvas id="cost-compare-bar"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Optimization Opportunity Cards -->
+      <div class="optim-section">
+        <h3 class="finops-panel__title reveal" style="transition-delay: 0.05s">AI-Detected Optimization Opportunities</h3>
+        <p class="finops-chart-card__sub reveal" style="transition-delay: 0.1s">Hover or tap a card to see the recommended action.</p>
+        <div class="optim-grid">
+
+          <div class="optim-flip reveal" style="transition-delay: 0.15s">
+            <div class="optim-flip__inner">
+              <div class="optim-flip__front">
+                <div class="optim-flip__badge optim-flip__badge--high">High Impact</div>
+                <div class="optim-flip__icon">📐</div>
+                <h4 class="optim-flip__title">Right-Size EC2 Instances</h4>
+                <p class="optim-flip__stat">14 instances oversized by &gt;40%</p>
+                <div class="optim-flip__savings">
+                  <span class="optim-flip__savings-amount">$840</span>
+                  <span class="optim-flip__savings-label">/mo savings</span>
+                </div>
+              </div>
+              <div class="optim-flip__back">
+                <div class="optim-flip__back-icon">✅</div>
+                <h4 class="optim-flip__back-title">Recommended Action</h4>
+                <ul class="optim-flip__actions">
+                  <li>Downsize 9× m5.xlarge → m5.large</li>
+                  <li>Switch 3× c5.2xl → c6g.xl (Graviton)</li>
+                  <li>Terminate 2× idle dev instances</li>
+                </ul>
+                <span class="optim-flip__confidence">Confidence: 97%</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="optim-flip reveal" style="transition-delay: 0.25s">
+            <div class="optim-flip__inner">
+              <div class="optim-flip__front">
+                <div class="optim-flip__badge optim-flip__badge--medium">Medium Impact</div>
+                <div class="optim-flip__icon">🗄️</div>
+                <h4 class="optim-flip__title">S3 Lifecycle Policies</h4>
+                <p class="optim-flip__stat">3.4 TB in expensive storage tiers</p>
+                <div class="optim-flip__savings">
+                  <span class="optim-flip__savings-amount">$380</span>
+                  <span class="optim-flip__savings-label">/mo savings</span>
+                </div>
+              </div>
+              <div class="optim-flip__back">
+                <div class="optim-flip__back-icon">✅</div>
+                <h4 class="optim-flip__back-title">Recommended Action</h4>
+                <ul class="optim-flip__actions">
+                  <li>Move 2.1 TB to S3 Infrequent Access</li>
+                  <li>Archive 1.1 TB to S3 Glacier</li>
+                  <li>Enable intelligent tiering on 4 buckets</li>
+                </ul>
+                <span class="optim-flip__confidence">Confidence: 94%</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="optim-flip reveal" style="transition-delay: 0.35s">
+            <div class="optim-flip__inner">
+              <div class="optim-flip__front">
+                <div class="optim-flip__badge optim-flip__badge--high">High Impact</div>
+                <div class="optim-flip__icon">💾</div>
+                <h4 class="optim-flip__title">RDS Reserved Instances</h4>
+                <p class="optim-flip__stat">3 databases running on-demand</p>
+                <div class="optim-flip__savings">
+                  <span class="optim-flip__savings-amount">$520</span>
+                  <span class="optim-flip__savings-label">/mo savings</span>
+                </div>
+              </div>
+              <div class="optim-flip__back">
+                <div class="optim-flip__back-icon">✅</div>
+                <h4 class="optim-flip__back-title">Recommended Action</h4>
+                <ul class="optim-flip__actions">
+                  <li>Purchase 1yr RI for prod db.r5.xlarge</li>
+                  <li>Convert 2× staging to db.t3.medium</li>
+                  <li>Enable Aurora Serverless v2 scaling</li>
+                </ul>
+                <span class="optim-flip__confidence">Confidence: 91%</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Auto-Remediation Flow -->
+      <div class="remediation-section">
+        <h3 class="finops-panel__title reveal" style="transition-delay: 0.05s">Auto-Remediation Pipeline</h3>
+        <p class="finops-chart-card__sub reveal" style="transition-delay: 0.1s">CloudShift continuously monitors and auto-applies optimizations when safe.</p>
+
+        <div class="remediation-flow reveal" style="transition-delay: 0.15s">
+          <div class="remediation-step">
+            <div class="remediation-step__icon">🔍</div>
+            <h4 class="remediation-step__title">Detect</h4>
+            <p class="remediation-step__desc">AI scans for cost anomalies and waste patterns every 15 minutes.</p>
+          </div>
+          <div class="remediation-arrow">
+            <svg width="40" height="20" viewBox="0 0 40 20"><path d="M0 10h32M28 4l8 6-8 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="remediation-step">
+            <div class="remediation-step__icon">⚖️</div>
+            <h4 class="remediation-step__title">Evaluate</h4>
+            <p class="remediation-step__desc">Risk assessment ensures changes won't impact performance or availability.</p>
+          </div>
+          <div class="remediation-arrow">
+            <svg width="40" height="20" viewBox="0 0 40 20"><path d="M0 10h32M28 4l8 6-8 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="remediation-step">
+            <div class="remediation-step__icon">🔧</div>
+            <h4 class="remediation-step__title">Apply</h4>
+            <p class="remediation-step__desc">Auto-applies safe changes: scaling, scheduling, and tier adjustments.</p>
+          </div>
+          <div class="remediation-arrow">
+            <svg width="40" height="20" viewBox="0 0 40 20"><path d="M0 10h32M28 4l8 6-8 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="remediation-step">
+            <div class="remediation-step__icon">✅</div>
+            <h4 class="remediation-step__title">Verify</h4>
+            <p class="remediation-step__desc">Validates health metrics post-change and auto-rolls back if needed.</p>
+          </div>
+        </div>
+
+        <!-- Total Savings Aggregator -->
+        <div class="savings-total reveal" style="transition-delay: 0.25s">
+          <div class="savings-total__left">
+            <div class="savings-total__status">
+              <span class="savings-total__dot"></span>
+              <span class="savings-total__status-text">Autopilot Active</span>
+            </div>
+            <div class="savings-total__line">
+              <span class="savings-total__label">Total Monthly Savings</span>
+              <span class="savings-total__amount" data-counter-target="1740" data-counter-prefix="$">$0</span>
+            </div>
+            <div class="savings-total__line savings-total__line--sub">
+              <span class="savings-total__label">Projected Annual Savings</span>
+              <span class="savings-total__amount savings-total__amount--annual" data-counter-target="20880" data-counter-prefix="$">$0</span>
+            </div>
+          </div>
+          <div class="savings-total__right">
+            <div class="savings-total__breakdown">
+              <div class="savings-total__item"><span>EC2 Right-Sizing</span><span class="savings-total__item-val">$840</span></div>
+              <div class="savings-total__item"><span>S3 Lifecycle</span><span class="savings-total__item-val">$380</span></div>
+              <div class="savings-total__item"><span>RDS Reserved</span><span class="savings-total__item-val">$520</span></div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -742,6 +978,7 @@
     </div>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
