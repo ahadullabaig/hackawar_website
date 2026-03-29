@@ -42,6 +42,52 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
+// -------------------- Service Mapping Hover Interactions --------------------
+(function() {
+  const grid = document.getElementById('mapping-grid');
+  if (!grid) return;
+
+  let activeRow = null;
+
+  grid.addEventListener('mouseenter', function(e) {
+    const card = e.target.closest('.mapping__card');
+    if (!card) return;
+
+    const row = card.dataset.row;
+    if (!row || row === activeRow) return;
+    activeRow = row;
+
+    // Highlight all elements in the same row
+    const siblings = grid.querySelectorAll('[data-row="' + row + '"]');
+    siblings.forEach(el => {
+      if (el.classList.contains('mapping__card') && el !== card) {
+        el.classList.add('mapping__card--highlight');
+      }
+      if (el.classList.contains('mapping__connector')) {
+        el.classList.add('mapping__connector--active');
+      }
+    });
+  }, true);
+
+  grid.addEventListener('mouseleave', function(e) {
+    const card = e.target.closest('.mapping__card');
+    if (!card) return;
+
+    const row = card.dataset.row;
+    if (!row) return;
+
+    // Check if we're moving to another element in the same row
+    const related = e.relatedTarget?.closest?.('[data-row="' + row + '"]');
+    if (related) return;
+
+    activeRow = null;
+    const siblings = grid.querySelectorAll('[data-row="' + row + '"]');
+    siblings.forEach(el => {
+      el.classList.remove('mapping__card--highlight', 'mapping__connector--active');
+    });
+  }, true);
+})();
+
 // -------------------- Intersection Observer for Reveal Animations --------------------
 (function() {
   const reveals = document.querySelectorAll('.reveal');

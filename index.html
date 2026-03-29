@@ -97,21 +97,288 @@
   <!-- ===================== Phase 2: Transition Portal ===================== -->
   <section class="section section--transition" id="transition" data-phase="transition">
     <div class="container">
-      <div class="section__header">
+
+      <!-- Section header -->
+      <div class="section__header reveal">
         <span class="badge badge--aws">Our Solution</span>
         <h2 class="section__title">Enter <span class="text-aws-gradient">CloudShift</span></h2>
         <p class="section__subtitle">Your AI-powered bridge from Google Cloud to AWS.</p>
       </div>
+
+      <!-- Split-screen portal -->
+      <div class="portal">
+
+        <!-- GCP World (fading out) -->
+        <div class="portal__side portal__side--gcp reveal reveal--left">
+          <div class="portal__side-header">
+            <span class="portal__icon">☁️</span>
+            <h3 class="portal__side-title">GCP World</h3>
+            <span class="portal__tag portal__tag--old">Before</span>
+          </div>
+          <ul class="portal__list">
+            <li class="portal__item portal__item--pain">
+              <span class="portal__item-icon">✗</span>
+              <span>6-18 months manual migration</span>
+            </li>
+            <li class="portal__item portal__item--pain">
+              <span class="portal__item-icon">✗</span>
+              <span>$2M+ consulting fees</span>
+            </li>
+            <li class="portal__item portal__item--pain">
+              <span class="portal__item-icon">✗</span>
+              <span>Error-prone service mapping</span>
+            </li>
+            <li class="portal__item portal__item--pain">
+              <span class="portal__item-icon">✗</span>
+              <span>No cost visibility post-migration</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Portal divider -->
+        <div class="portal__divider reveal reveal--scale" aria-hidden="true">
+          <div class="portal__divider-line"></div>
+          <div class="portal__divider-glow"></div>
+          <div class="portal__divider-label">→</div>
+        </div>
+
+        <!-- AWS World (emerging) -->
+        <div class="portal__side portal__side--aws reveal reveal--right reveal-delay-2">
+          <div class="portal__side-header">
+            <span class="portal__icon">⚡</span>
+            <h3 class="portal__side-title">AWS World</h3>
+            <span class="portal__tag portal__tag--new">After</span>
+          </div>
+          <ul class="portal__list">
+            <li class="portal__item portal__item--win">
+              <span class="portal__item-icon">✓</span>
+              <span>AI migration in minutes</span>
+            </li>
+            <li class="portal__item portal__item--win">
+              <span class="portal__item-icon">✓</span>
+              <span>70% cost reduction</span>
+            </li>
+            <li class="portal__item portal__item--win">
+              <span class="portal__item-icon">✓</span>
+              <span>Intelligent service mapping</span>
+            </li>
+            <li class="portal__item portal__item--win">
+              <span class="portal__item-icon">✓</span>
+              <span>Continuous FinOps optimization</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Feature cards -->
+      <div class="portal__features">
+        <div class="portal__feature-card reveal reveal-delay-1">
+          <div class="portal__feature-icon">🔍</div>
+          <h4 class="portal__feature-title">AI-Powered Analysis</h4>
+          <p class="portal__feature-text">Scans your entire GCP infrastructure and creates a comprehensive migration blueprint automatically.</p>
+        </div>
+        <div class="portal__feature-card reveal reveal-delay-2">
+          <div class="portal__feature-icon">🔄</div>
+          <h4 class="portal__feature-title">Smart Service Mapping</h4>
+          <p class="portal__feature-text">Maps every GCP service to its optimal AWS equivalent with compatibility scoring and gap analysis.</p>
+        </div>
+        <div class="portal__feature-card reveal reveal-delay-3">
+          <div class="portal__feature-icon">💰</div>
+          <h4 class="portal__feature-title">Cost Optimization</h4>
+          <p class="portal__feature-text">Estimates migration costs, identifies savings opportunities, and runs continuous FinOps post-migration.</p>
+        </div>
+      </div>
+
     </div>
   </section>
 
   <!-- ===================== Service Mapping ===================== -->
   <section class="section section--mapping" id="service-mapping" data-phase="aws">
     <div class="container">
-      <div class="section__header">
+      <div class="section__header reveal">
         <span class="badge badge--aws">Service Mapping</span>
         <h2 class="section__title">Intelligent Service Mapping</h2>
         <p class="section__subtitle">AI-powered mapping of every GCP service to its optimal AWS equivalent.</p>
+      </div>
+
+      <!-- Mapping grid -->
+      <div class="mapping" id="mapping-grid">
+
+        <!-- Column headers -->
+        <div class="mapping__col-header mapping__col-header--gcp reveal" style="transition-delay: 0s">
+          <span class="mapping__col-icon">☁️</span>
+          <span>Google Cloud</span>
+        </div>
+        <div class="mapping__col-header mapping__col-header--center reveal" style="transition-delay: 0.05s">
+          <span>Mapping</span>
+        </div>
+        <div class="mapping__col-header mapping__col-header--aws reveal" style="transition-delay: 0.1s">
+          <span class="mapping__col-icon">⚡</span>
+          <span>Amazon Web Services</span>
+        </div>
+
+        <!-- Row 1: Compute -->
+        <div class="mapping__card mapping__card--gcp reveal reveal--left" data-map-id="compute-gcp" data-row="compute" style="transition-delay: 0s">
+          <div class="mapping__card-icon">🖥️</div>
+          <div class="mapping__card-body">
+            <span class="mapping__card-category">Compute</span>
+            <h4 class="mapping__card-name">Compute Engine</h4>
+            <p class="mapping__card-desc">Virtual machine instances for general workloads</p>
+          </div>
+        </div>
+        <div class="mapping__connector reveal reveal--scale" data-map-id="compute-line" data-row="compute" style="transition-delay: 0.05s; --stagger: 0.05s">
+          <svg class="mapping__svg" viewBox="0 0 80 20" preserveAspectRatio="none">
+            <path class="mapping__svg-path" d="M 0 10 L 80 10" />
+            <circle class="mapping__svg-dot" r="3">
+              <animateMotion dur="2s" repeatCount="indefinite" path="M 0 10 L 80 10" />
+            </circle>
+          </svg>
+          <span class="mapping__connector-badge" data-tier="high">98%</span>
+        </div>
+        <div class="mapping__card mapping__card--aws reveal reveal--right" data-map-id="compute-aws" data-row="compute" style="transition-delay: 0.1s">
+          <div class="mapping__card-icon">🖥️</div>
+          <div class="mapping__card-body">
+            <span class="mapping__card-category">Compute</span>
+            <h4 class="mapping__card-name">Amazon EC2</h4>
+            <p class="mapping__card-desc">Elastic compute cloud for scalable virtual servers</p>
+          </div>
+        </div>
+
+        <!-- Row 2: Storage -->
+        <div class="mapping__card mapping__card--gcp reveal reveal--left" data-map-id="storage-gcp" data-row="storage" style="transition-delay: 0.12s">
+          <div class="mapping__card-icon">🗄️</div>
+          <div class="mapping__card-body">
+            <span class="mapping__card-category">Storage</span>
+            <h4 class="mapping__card-name">Cloud Storage</h4>
+            <p class="mapping__card-desc">Object storage for any amount of data</p>
+          </div>
+        </div>
+        <div class="mapping__connector reveal reveal--scale" data-map-id="storage-line" data-row="storage" style="transition-delay: 0.17s; --stagger: 0.17s">
+          <svg class="mapping__svg" viewBox="0 0 80 20" preserveAspectRatio="none">
+            <path class="mapping__svg-path" d="M 0 10 L 80 10" />
+            <circle class="mapping__svg-dot" r="3">
+              <animateMotion dur="2.2s" repeatCount="indefinite" path="M 0 10 L 80 10" />
+            </circle>
+          </svg>
+          <span class="mapping__connector-badge" data-tier="high">99%</span>
+        </div>
+        <div class="mapping__card mapping__card--aws reveal reveal--right" data-map-id="storage-aws" data-row="storage" style="transition-delay: 0.22s">
+          <div class="mapping__card-icon">🪣</div>
+          <div class="mapping__card-body">
+            <span class="mapping__card-category">Storage</span>
+            <h4 class="mapping__card-name">Amazon S3</h4>
+            <p class="mapping__card-desc">Simple storage service for object data at scale</p>
+          </div>
+        </div>
+
+        <!-- Row 3: Database -->
+        <div class="mapping__card mapping__card--gcp reveal reveal--left" data-map-id="db-gcp" data-row="db" style="transition-delay: 0.24s">
+          <div class="mapping__card-icon">🗃️</div>
+          <div class="mapping__card-body">
+            <span class="mapping__card-category">Database</span>
+            <h4 class="mapping__card-name">Cloud SQL</h4>
+            <p class="mapping__card-desc">Managed relational database (MySQL, PostgreSQL)</p>
+          </div>
+        </div>
+        <div class="mapping__connector reveal reveal--scale" data-map-id="db-line" data-row="db" style="transition-delay: 0.29s; --stagger: 0.29s">
+          <svg class="mapping__svg" viewBox="0 0 80 20" preserveAspectRatio="none">
+            <path class="mapping__svg-path" d="M 0 10 L 80 10" />
+            <circle class="mapping__svg-dot" r="3">
+              <animateMotion dur="2.4s" repeatCount="indefinite" path="M 0 10 L 80 10" />
+            </circle>
+          </svg>
+          <span class="mapping__connector-badge" data-tier="high">95%</span>
+        </div>
+        <div class="mapping__card mapping__card--aws reveal reveal--right" data-map-id="db-aws" data-row="db" style="transition-delay: 0.34s">
+          <div class="mapping__card-icon">🗃️</div>
+          <div class="mapping__card-body">
+            <span class="mapping__card-category">Database</span>
+            <h4 class="mapping__card-name">Amazon RDS</h4>
+            <p class="mapping__card-desc">Managed relational database with multi-AZ support</p>
+          </div>
+        </div>
+
+        <!-- Row 4: Serverless -->
+        <div class="mapping__card mapping__card--gcp reveal reveal--left" data-map-id="func-gcp" data-row="func" style="transition-delay: 0.36s">
+          <div class="mapping__card-icon">⚙️</div>
+          <div class="mapping__card-body">
+            <span class="mapping__card-category">Serverless</span>
+            <h4 class="mapping__card-name">Cloud Functions</h4>
+            <p class="mapping__card-desc">Event-driven serverless compute platform</p>
+          </div>
+        </div>
+        <div class="mapping__connector reveal reveal--scale" data-map-id="func-line" data-row="func" style="transition-delay: 0.41s; --stagger: 0.41s">
+          <svg class="mapping__svg" viewBox="0 0 80 20" preserveAspectRatio="none">
+            <path class="mapping__svg-path" d="M 0 10 L 80 10" />
+            <circle class="mapping__svg-dot" r="3">
+              <animateMotion dur="1.8s" repeatCount="indefinite" path="M 0 10 L 80 10" />
+            </circle>
+          </svg>
+          <span class="mapping__connector-badge" data-tier="mid">92%</span>
+        </div>
+        <div class="mapping__card mapping__card--aws reveal reveal--right" data-map-id="func-aws" data-row="func" style="transition-delay: 0.46s">
+          <div class="mapping__card-icon">⚙️</div>
+          <div class="mapping__card-body">
+            <span class="mapping__card-category">Serverless</span>
+            <h4 class="mapping__card-name">AWS Lambda</h4>
+            <p class="mapping__card-desc">Run code without provisioning servers</p>
+          </div>
+        </div>
+
+        <!-- Row 5: Containers -->
+        <div class="mapping__card mapping__card--gcp reveal reveal--left" data-map-id="k8s-gcp" data-row="k8s" style="transition-delay: 0.48s">
+          <div class="mapping__card-icon">📦</div>
+          <div class="mapping__card-body">
+            <span class="mapping__card-category">Containers</span>
+            <h4 class="mapping__card-name">GKE</h4>
+            <p class="mapping__card-desc">Managed Kubernetes engine for containers</p>
+          </div>
+        </div>
+        <div class="mapping__connector reveal reveal--scale" data-map-id="k8s-line" data-row="k8s" style="transition-delay: 0.53s; --stagger: 0.53s">
+          <svg class="mapping__svg" viewBox="0 0 80 20" preserveAspectRatio="none">
+            <path class="mapping__svg-path" d="M 0 10 L 80 10" />
+            <circle class="mapping__svg-dot" r="3">
+              <animateMotion dur="2.1s" repeatCount="indefinite" path="M 0 10 L 80 10" />
+            </circle>
+          </svg>
+          <span class="mapping__connector-badge" data-tier="high">97%</span>
+        </div>
+        <div class="mapping__card mapping__card--aws reveal reveal--right" data-map-id="k8s-aws" data-row="k8s" style="transition-delay: 0.58s">
+          <div class="mapping__card-icon">📦</div>
+          <div class="mapping__card-body">
+            <span class="mapping__card-category">Containers</span>
+            <h4 class="mapping__card-name">Amazon EKS</h4>
+            <p class="mapping__card-desc">Elastic Kubernetes service for container orchestration</p>
+          </div>
+        </div>
+
+        <!-- Row 6: AI / ML -->
+        <div class="mapping__card mapping__card--gcp reveal reveal--left" data-map-id="ai-gcp" data-row="ai" style="transition-delay: 0.6s">
+          <div class="mapping__card-icon">🧠</div>
+          <div class="mapping__card-body">
+            <span class="mapping__card-category">AI / ML</span>
+            <h4 class="mapping__card-name">Vertex AI</h4>
+            <p class="mapping__card-desc">Unified ML platform for training & deployment</p>
+          </div>
+        </div>
+        <div class="mapping__connector reveal reveal--scale" data-map-id="ai-line" data-row="ai" style="transition-delay: 0.65s; --stagger: 0.65s">
+          <svg class="mapping__svg" viewBox="0 0 80 20" preserveAspectRatio="none">
+            <path class="mapping__svg-path" d="M 0 10 L 80 10" />
+            <circle class="mapping__svg-dot" r="3">
+              <animateMotion dur="2.6s" repeatCount="indefinite" path="M 0 10 L 80 10" />
+            </circle>
+          </svg>
+          <span class="mapping__connector-badge" data-tier="low">88%</span>
+        </div>
+        <div class="mapping__card mapping__card--aws reveal reveal--right" data-map-id="ai-aws" data-row="ai" style="transition-delay: 0.7s">
+          <div class="mapping__card-icon">🧠</div>
+          <div class="mapping__card-body">
+            <span class="mapping__card-category">AI / ML</span>
+            <h4 class="mapping__card-name">Amazon SageMaker</h4>
+            <p class="mapping__card-desc">Build, train, and deploy ML models at scale</p>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
