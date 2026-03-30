@@ -29,6 +29,28 @@
   updateNav();
 })();
 
+// -------------------- Mobile Hamburger Menu --------------------
+(function() {
+  const hamburger = document.getElementById('nav-hamburger');
+  const navLinks = document.getElementById('nav-links');
+  if (!hamburger || !navLinks) return;
+
+  hamburger.addEventListener('click', function() {
+    const isOpen = navLinks.classList.toggle('nav__links--open');
+    hamburger.classList.toggle('nav__hamburger--active', isOpen);
+    hamburger.setAttribute('aria-expanded', isOpen);
+  });
+
+  // Close menu when a link is clicked
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', function() {
+      navLinks.classList.remove('nav__links--open');
+      hamburger.classList.remove('nav__hamburger--active');
+      hamburger.setAttribute('aria-expanded', 'false');
+    });
+  });
+})();
+
 // -------------------- Smooth Anchor Scrolling --------------------
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function(e) {
@@ -120,7 +142,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     if (isNaN(target)) return;
     const duration = 1200;
     const start = performance.now();
-    const prefix = el.textContent.startsWith('$') ? '$' : '';
+    const prefix = el.dataset.counterPrefix || (el.textContent.startsWith('$') ? '$' : '');
 
     function tick(now) {
       const elapsed = now - start;

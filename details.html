@@ -33,28 +33,168 @@
       100% { opacity: 1; }
     }
 
+    /* ---- Details Hero (Full-screen) ---- */
     .details-hero {
-      padding-top: 120px;
-      padding-bottom: 40px;
+      min-height: 85vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       text-align: center;
       position: relative;
+      overflow: hidden;
+      padding: 120px 24px 60px;
+    }
+    .details-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 50% 50%, rgba(255,153,0,0.06) 0%, transparent 60%),
+        radial-gradient(circle at 20% 80%, rgba(66,133,244,0.04) 0%, transparent 40%),
+        radial-gradient(circle at 80% 20%, rgba(0,200,83,0.03) 0%, transparent 40%);
+      pointer-events: none;
+    }
+    /* Animated circuit grid */
+    .details-hero__grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,153,0,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,153,0,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse at 50% 50%, black 30%, transparent 70%);
+      -webkit-mask-image: radial-gradient(ellipse at 50% 50%, black 30%, transparent 70%);
+      animation: gridPulse 6s ease-in-out infinite;
+    }
+    @keyframes gridPulse {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 0.8; }
+    }
+    .details-hero__content {
+      position: relative;
+      z-index: 2;
+      max-width: 720px;
     }
     .details-hero .section__title {
-      font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+      font-size: clamp(2.8rem, 5.5vw, 4.2rem);
       background: linear-gradient(135deg, var(--text-primary, #f2f3f3) 30%, var(--accent-primary, #FF9900));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      margin-bottom: 16px;
-      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
     }
     .details-hero .section__subtitle {
       text-align: center;
-      max-width: 640px;
+      max-width: 560px;
       margin-left: auto;
       margin-right: auto;
-      font-size: 1.05rem;
+      font-size: 1.1rem;
       line-height: 1.7;
+      color: var(--text-secondary, #afb4be);
+    }
+
+    /* Jump-to navigation chips */
+    .hero-nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 40px;
+    }
+    .hero-nav__chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.6);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 8px 16px;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    .hero-nav__chip:hover {
+      color: #FF9900;
+      border-color: rgba(255,153,0,0.3);
+      background: rgba(255,153,0,0.06);
+      transform: translateY(-2px);
+    }
+    .hero-nav__chip-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(255,153,0,0.4);
+    }
+    .hero-nav__chip:hover .hero-nav__chip-dot {
+      background: #FF9900;
+      box-shadow: 0 0 8px rgba(255,153,0,0.4);
+    }
+
+    /* Scroll-down indicator */
+    .hero-scroll {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      animation: scrollBounce 2s ease-in-out infinite;
+      z-index: 2;
+    }
+    .hero-scroll__text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: rgba(255,255,255,0.3);
+    }
+    .hero-scroll__chevron svg {
+      width: 20px;
+      height: 20px;
+      stroke: rgba(255,153,0,0.4);
+    }
+    @keyframes scrollBounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(8px); }
+    }
+
+    /* ---- Section Connector (replaces gradient hr) ---- */
+    .section-connector {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 8px 0;
+      margin: 0 0 48px;
+    }
+    .section-connector__line {
+      width: 1px;
+      height: 48px;
+      background: linear-gradient(180deg, transparent, rgba(255,153,0,0.25));
+    }
+    .section-connector__dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255,153,0,0.5);
+      box-shadow: 0 0 12px rgba(255,153,0,0.3);
+      animation: connectorPulse 2.5s ease-in-out infinite;
+    }
+    .section-connector__line--bottom {
+      height: 48px;
+      background: linear-gradient(180deg, rgba(255,153,0,0.25), transparent);
+    }
+    @keyframes connectorPulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 12px rgba(255,153,0,0.3); }
+      50% { transform: scale(1.4); box-shadow: 0 0 20px rgba(255,153,0,0.5); }
     }
 
     /* Section defaults */
@@ -64,13 +204,6 @@
     }
     .details-section:first-of-type {
       padding-top: 24px;
-    }
-    .divider--gradient {
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(255,153,0,0.3), transparent);
-      border: none;
-      margin: 0 0 48px;
-      opacity: 1;
     }
 
     /* Architecture Diagram */
@@ -194,92 +327,276 @@
       50% { opacity: 1; transform: translateX(4px); }
     }
 
-    /* Agent Cards */
-    .agents-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      margin: 40px 0 0;
-    }
-    .agents-grid .agent-card:nth-child(4),
-    .agents-grid .agent-card:nth-child(5) {
-      max-width: 100%;
-    }
-    @media (max-width: 900px) {
-      .agents-grid { grid-template-columns: 1fr; }
-    }
-    .agent-card {
-      background: rgba(30,40,58,0.6);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 16px;
-      padding: 28px 24px;
-      transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+    /* ---- Neural Hub Layout ---- */
+    .neural-hub {
       position: relative;
-      overflow: hidden;
-      backdrop-filter: blur(12px);
+      width: 100%;
+      max-width: 800px;
+      height: 800px;
+      margin: 60px auto 0;
     }
-    .agent-card::before {
+
+    /* ---- Central Core ---- */
+    .neural-hub__core {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 140px;
+      height: 140px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 5;
+    }
+    .neural-hub__core-bg {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,153,0,0.15) 0%, rgba(255,153,0,0.03) 60%, transparent 80%);
+      border: 2px solid rgba(255,153,0,0.2);
+      animation: coreBreath 3s ease-in-out infinite;
+    }
+    .neural-hub__core-glow {
+      position: absolute;
+      inset: -30px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,153,0,0.1), transparent 70%);
+      animation: coreGlow 4s ease-in-out infinite;
+    }
+    @keyframes coreBreath {
+      0%, 100% { transform: scale(1); border-color: rgba(255,153,0,0.2); }
+      50% { transform: scale(1.06); border-color: rgba(255,153,0,0.4); }
+    }
+    @keyframes coreGlow {
+      0%, 100% { opacity: 0.5; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.15); }
+    }
+    .neural-hub__core-icon {
+      position: relative;
+      z-index: 2;
+    }
+    .neural-hub__core-icon svg {
+      width: 48px;
+      height: 48px;
+      stroke: #FF9900;
+      filter: drop-shadow(0 0 12px rgba(255,153,0,0.5));
+    }
+    .neural-hub__core-label {
+      position: relative;
+      z-index: 2;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: rgba(255,153,0,0.8);
+      margin-top: 8px;
+    }
+
+    /* ---- Orbital Rings ---- */
+    .neural-hub__orbit {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(255,153,0,0.06);
+      top: 50%;
+      left: 50%;
+    }
+    .neural-hub__orbit--1 {
+      width: 320px;
+      height: 320px;
+      margin-left: -160px;
+      margin-top: -160px;
+      border-color: rgba(255,153,0,0.08);
+    }
+    .neural-hub__orbit--2 {
+      width: 520px;
+      height: 520px;
+      margin-left: -260px;
+      margin-top: -260px;
+      border-color: rgba(255,153,0,0.05);
+    }
+    .neural-hub__orbit--3 {
+      width: 720px;
+      height: 720px;
+      margin-left: -360px;
+      margin-top: -360px;
+      border-color: rgba(255,153,0,0.03);
+    }
+
+    /* ---- Data Stream Particles on Orbits ---- */
+    .neural-hub__orbit--1::after,
+    .neural-hub__orbit--2::after {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--accent-primary, #FF9900), #4285F4, #00C853);
-      opacity: 0;
-      transition: opacity 0.3s ease;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--aws-orange, #FF9900);
+      box-shadow: 0 0 10px rgba(255,153,0,0.5);
+      top: -3px;
+      left: 50%;
+      margin-left: -3px;
     }
-    .agent-card::after {
-      content: '';
+    .neural-hub__orbit--1::after {
+      animation: orbitSpin1 6s linear infinite;
+      transform-origin: 3px 163px;
+    }
+    .neural-hub__orbit--2::after {
+      animation: orbitSpin2 10s linear infinite reverse;
+      transform-origin: 3px 263px;
+      background: #4285F4;
+      box-shadow: 0 0 10px rgba(66,133,244,0.5);
+    }
+    @keyframes orbitSpin1 { to { transform: rotate(360deg); } }
+    @keyframes orbitSpin2 { to { transform: rotate(360deg); } }
+
+    /* ---- SVG Data Streams (connector lines) ---- */
+    .neural-hub__streams {
       position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle at center, rgba(255,153,0,0.06), transparent 60%);
-      opacity: 0;
-      transition: opacity 0.4s ease;
-      pointer-events: none;
+      inset: 0;
+      z-index: 1;
     }
-    .agent-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 60px rgba(255,153,0,0.15);
-      border-color: rgba(255,153,0,0.3);
+    .neural-hub__streams svg {
+      width: 100%;
+      height: 100%;
     }
-    .agent-card:hover::before { opacity: 1; }
-    .agent-card:hover::after { opacity: 1; }
-    .agent-card__icon {
-      margin-bottom: 14px;
+    .neural-hub__stream-line {
+      stroke: rgba(255,153,0,0.12);
+      stroke-width: 1.5;
+      fill: none;
+    }
+    .neural-hub__stream-pulse {
+      stroke: url(#stream-gradient);
+      stroke-width: 2;
+      fill: none;
+      stroke-dasharray: 8 40;
+      animation: streamFlow 3s linear infinite;
+    }
+    .neural-hub__stream-pulse:nth-child(2) { animation-delay: -0.6s; }
+    .neural-hub__stream-pulse:nth-child(3) { animation-delay: -1.2s; }
+    .neural-hub__stream-pulse:nth-child(4) { animation-delay: -1.8s; }
+    .neural-hub__stream-pulse:nth-child(5) { animation-delay: -2.4s; }
+    @keyframes streamFlow {
+      to { stroke-dashoffset: -48; }
+    }
+
+    /* ---- Agent Nodes (pentagon positions) ---- */
+    .neural-hub__agent {
+      position: absolute;
+      width: 200px;
+      text-align: center;
+      z-index: 4;
+      transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+    }
+    .neural-hub__agent:hover {
+      transform: scale(1.08);
+      z-index: 10;
+    }
+    /* Pentagon positions: top-center, top-right, bottom-right, bottom-left, top-left */
+    .neural-hub__agent:nth-child(6) { top: 0;    left: 50%;  transform: translateX(-50%); }          /* Discovery - top */
+    .neural-hub__agent:nth-child(7) { top: 22%;  right: 0;   }                                        /* Mapping - top right */
+    .neural-hub__agent:nth-child(8) { bottom: 8%; right: 4%; }                                        /* Risk - bottom right */
+    .neural-hub__agent:nth-child(9) { bottom: 8%; left: 4%;  }                                        /* FinOps - bottom left */
+    .neural-hub__agent:nth-child(10) { top: 22%;  left: 0;   }                                        /* Watchdog - top left */
+
+    .neural-hub__agent:nth-child(6):hover { transform: translateX(-50%) scale(1.08); }
+
+    .neural-hub__agent-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: rgba(30,40,58,0.8);
+      border: 2px solid rgba(255,153,0,0.2);
       display: flex;
       align-items: center;
+      justify-content: center;
+      margin: 0 auto 10px;
+      transition: all 0.4s ease;
+      backdrop-filter: blur(10px);
     }
-    .agent-card__icon svg {
-      width: 32px;
-      height: 32px;
-      stroke: var(--accent-primary, #FF9900);
-      filter: drop-shadow(0 0 6px rgba(255,153,0,0.3));
+    .neural-hub__agent:hover .neural-hub__agent-icon {
+      border-color: rgba(255,153,0,0.5);
+      box-shadow: 0 0 24px rgba(255,153,0,0.2);
+      background: rgba(40,50,68,0.9);
     }
-    .agent-card__name {
+    .neural-hub__agent-icon svg {
+      width: 28px;
+      height: 28px;
+      stroke: #FF9900;
+      filter: drop-shadow(0 0 4px rgba(255,153,0,0.3));
+    }
+    /* Watchdog uses green */
+    .neural-hub__agent:nth-child(10) .neural-hub__agent-icon {
+      border-color: rgba(0,200,83,0.2);
+    }
+    .neural-hub__agent:nth-child(10) .neural-hub__agent-icon svg { stroke: #00C853; }
+    .neural-hub__agent:nth-child(10):hover .neural-hub__agent-icon {
+      border-color: rgba(0,200,83,0.5);
+      box-shadow: 0 0 24px rgba(0,200,83,0.2);
+    }
+
+    .neural-hub__agent-name {
       font-family: 'Space Grotesk', sans-serif;
       font-weight: 700;
-      font-size: 1.05rem;
+      font-size: 0.9rem;
       color: var(--text-primary, #f2f3f3);
-      margin-bottom: 8px;
+      margin-bottom: 4px;
     }
-    .agent-card__desc {
-      font-size: 0.85rem;
+    .neural-hub__agent-desc {
+      font-size: 0.75rem;
       color: var(--text-secondary, #afb4be);
-      line-height: 1.6;
+      line-height: 1.55;
+      max-width: 190px;
+      margin: 0 auto;
     }
-    .agent-card__number {
-      position: absolute;
-      top: 16px;
-      right: 20px;
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 700;
-      font-size: 2.2rem;
-      opacity: 0.05;
-      color: var(--text-primary, #f2f3f3);
+    .neural-hub__agent-tag {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: rgba(255,153,0,0.6);
+      background: rgba(255,153,0,0.06);
+      border: 1px solid rgba(255,153,0,0.1);
+      padding: 2px 8px;
+      border-radius: 20px;
+      margin-bottom: 6px;
+    }
+    .neural-hub__agent:nth-child(10) .neural-hub__agent-tag {
+      color: rgba(0,200,83,0.6);
+      background: rgba(0,200,83,0.06);
+      border-color: rgba(0,200,83,0.1);
+    }
+
+    /* ---- Mobile: Stack vertically ---- */
+    @media (max-width: 900px) {
+      .neural-hub {
+        height: auto;
+        max-width: 100%;
+      }
+      .neural-hub__orbit,
+      .neural-hub__streams { display: none; }
+      .neural-hub__core {
+        position: relative;
+        top: auto; left: auto;
+        transform: none;
+        margin: 0 auto 40px;
+      }
+      .neural-hub__agent {
+        position: relative;
+        top: auto !important; left: auto !important; right: auto !important; bottom: auto !important;
+        transform: none !important;
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto 24px;
+        padding: 20px;
+        background: rgba(30,40,58,0.5);
+        border: 1px solid rgba(255,255,255,0.06);
+        border-radius: 16px;
+      }
+      .neural-hub__agent:hover { transform: none !important; }
     }
 
     /* Tech Stack Layers */
@@ -730,13 +1047,19 @@
         <a href="details.html" class="nav__link nav__link--active">Architecture</a>
         <a href="index.html#aws-services" class="nav__cta">Tech Stack →</a>
       </div>
+      <button class="nav__hamburger" id="nav-hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span class="nav__hamburger-line"></span>
+        <span class="nav__hamburger-line"></span>
+        <span class="nav__hamburger-line"></span>
+      </button>
     </div>
   </nav>
 
-  <!-- ===================== Page Header ===================== -->
+  <!-- ===================== Hero ===================== -->
   <main>
     <div class="details-hero">
-      <div class="container">
+      <div class="details-hero__grid"></div>
+      <div class="details-hero__content">
         <div class="section__header">
           <span class="badge badge--aws">Technical Deep Dive</span>
           <h1 class="section__title">RADCloud Architecture</h1>
@@ -744,11 +1067,25 @@
             Multi-agent AI system, 5 specialized agents, cross-cloud intelligence, and the technology powering Day 0 optimization.
           </p>
         </div>
+        <nav class="hero-nav">
+          <a href="#arch-system" class="hero-nav__chip"><span class="hero-nav__chip-dot"></span> System Architecture</a>
+          <a href="#arch-agents" class="hero-nav__chip"><span class="hero-nav__chip-dot"></span> AI Agents</a>
+          <a href="#arch-stack" class="hero-nav__chip"><span class="hero-nav__chip-dot"></span> Tech Stack</a>
+          <a href="#arch-sprint" class="hero-nav__chip"><span class="hero-nav__chip-dot"></span> Sprint Plan</a>
+        </nav>
+      </div>
+      <div class="hero-scroll">
+        <span class="hero-scroll__text">Explore</span>
+        <div class="hero-scroll__chevron">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </div>
       </div>
     </div>
 
     <!-- ===================== Architecture Diagram ===================== -->
-    <div class="details-section">
+    <div class="details-section" id="arch-system">
       <div class="container">
         <div class="section__header reveal">
           <span class="badge badge--aws">System Architecture</span>
@@ -807,54 +1144,124 @@
     </div>
 
     <!-- ===================== Five Agents ===================== -->
-    <div class="details-section">
+    <div class="details-section" id="arch-agents">
       <div class="container">
-        <hr class="divider--gradient">
+        <div class="section-connector">
+          <div class="section-connector__line"></div>
+          <div class="section-connector__dot"></div>
+          <div class="section-connector__line section-connector__line--bottom"></div>
+        </div>
         <div class="section__header reveal">
           <span class="badge badge--aws">Specialized Agents</span>
           <h2 class="section__title">5 AI Agents Working in Parallel</h2>
           <p class="section__subtitle">Each agent is specialized for a critical phase of migration + FinOps optimization.</p>
         </div>
 
-        <div class="agents-grid">
-          <div class="agent-card reveal">
-            <span class="agent-card__number">01</span>
-            <div class="agent-card__icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/><path d="M11 8v6M8 11h6"/></svg></div>
-            <div class="agent-card__name">Discovery Agent</div>
-            <p class="agent-card__desc">Identifies all GCP resources, configurations, dependencies, and usage patterns. Scans IAM, networking, compute, storage, and database layers.</p>
+        <div class="neural-hub reveal">
+          <!-- Central Core -->
+          <div class="neural-hub__core">
+            <div class="neural-hub__core-glow"></div>
+            <div class="neural-hub__core-bg"></div>
+            <div class="neural-hub__core-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"/>
+                <path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"/>
+              </svg>
+            </div>
+            <div class="neural-hub__core-label">RADCloud Core</div>
           </div>
-          <div class="agent-card reveal">
-            <span class="agent-card__number">02</span>
-            <div class="agent-card__icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg></div>
-            <div class="agent-card__name">Mapping Agent</div>
-            <p class="agent-card__desc">Maps every GCP service to its optimal AWS equivalent. Flags incompatible services (~15%) and generates compatibility scores.</p>
+
+          <!-- Orbital Rings -->
+          <div class="neural-hub__orbit neural-hub__orbit--1"></div>
+          <div class="neural-hub__orbit neural-hub__orbit--2"></div>
+          <div class="neural-hub__orbit neural-hub__orbit--3"></div>
+
+          <!-- SVG Data Streams connecting agents to core -->
+          <div class="neural-hub__streams">
+            <svg viewBox="0 0 800 800">
+              <defs>
+                <linearGradient id="stream-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#FF9900" stop-opacity="0"/>
+                  <stop offset="50%" stop-color="#FF9900" stop-opacity="0.8"/>
+                  <stop offset="100%" stop-color="#FF9900" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <!-- Static base lines: center(400,400) → each agent icon center -->
+              <line class="neural-hub__stream-line" x1="400" y1="400" x2="400" y2="60"/>
+              <line class="neural-hub__stream-line" x1="400" y1="400" x2="700" y2="220"/>
+              <line class="neural-hub__stream-line" x1="400" y1="400" x2="680" y2="640"/>
+              <line class="neural-hub__stream-line" x1="400" y1="400" x2="120" y2="640"/>
+              <line class="neural-hub__stream-line" x1="400" y1="400" x2="100" y2="220"/>
+              <!-- Animated pulse lines (same paths) -->
+              <line class="neural-hub__stream-pulse" x1="400" y1="400" x2="400" y2="60"/>
+              <line class="neural-hub__stream-pulse" x1="400" y1="400" x2="700" y2="220"/>
+              <line class="neural-hub__stream-pulse" x1="400" y1="400" x2="680" y2="640"/>
+              <line class="neural-hub__stream-pulse" x1="400" y1="400" x2="120" y2="640"/>
+              <line class="neural-hub__stream-pulse" x1="400" y1="400" x2="100" y2="220"/>
+            </svg>
           </div>
-          <div class="agent-card reveal">
-            <span class="agent-card__number">03</span>
-            <div class="agent-card__icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-            <div class="agent-card__name">Risk Agent</div>
-            <p class="agent-card__desc">Detects deployment risks, architecture incompatibilities, and data migration hazards. Produces confidence-ranked migration plans with rollback strategies.</p>
+
+          <!-- Agent 1: Discovery (top center) -->
+          <div class="neural-hub__agent">
+            <div class="neural-hub__agent-tag">01 Discovery</div>
+            <div class="neural-hub__agent-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/><path d="M11 8v6M8 11h6"/></svg>
+            </div>
+            <div class="neural-hub__agent-name">Discovery Agent</div>
+            <p class="neural-hub__agent-desc">Scans all GCP resources, configs, IAM, billing data, and usage patterns.</p>
           </div>
-          <div class="agent-card reveal">
-            <span class="agent-card__number">04</span>
-            <div class="agent-card__icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
-            <div class="agent-card__name">FinOps Intel Agent</div>
-            <p class="agent-card__desc">Analyzes 12 months of usage data to pre-calculate Reserved Instances, Savings Plans, and right-sized compute — optimized BEFORE deployment.</p>
+
+          <!-- Agent 2: Mapping (top right) -->
+          <div class="neural-hub__agent">
+            <div class="neural-hub__agent-tag">02 Mapping</div>
+            <div class="neural-hub__agent-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
+            </div>
+            <div class="neural-hub__agent-name">Mapping Agent</div>
+            <p class="neural-hub__agent-desc">Maps every GCP service to its optimal AWS equivalent with compatibility scores.</p>
           </div>
-          <div class="agent-card reveal">
-            <span class="agent-card__number">05</span>
-            <div class="agent-card__icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg></div>
-            <div class="agent-card__name">Watchdog Agent</div>
-            <p class="agent-card__desc">Post-migration continuous monitoring. Detects anomalies, cost spikes, and performance issues. Triggers auto-remediation when safe.</p>
+
+          <!-- Agent 3: Risk (bottom right) -->
+          <div class="neural-hub__agent">
+            <div class="neural-hub__agent-tag">03 Risk</div>
+            <div class="neural-hub__agent-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div class="neural-hub__agent-name">Risk Agent</div>
+            <p class="neural-hub__agent-desc">Detects deployment risks and generates confidence-ranked rollback plans.</p>
+          </div>
+
+          <!-- Agent 4: FinOps Intel (bottom left) -->
+          <div class="neural-hub__agent">
+            <div class="neural-hub__agent-tag">04 FinOps Intel</div>
+            <div class="neural-hub__agent-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+            <div class="neural-hub__agent-name">FinOps Intel Agent</div>
+            <p class="neural-hub__agent-desc">Pre-calculates Reserved Instances, Savings Plans, and right-sized compute.</p>
+          </div>
+
+          <!-- Agent 5: Watchdog (top left) -->
+          <div class="neural-hub__agent">
+            <div class="neural-hub__agent-tag">05 Watchdog</div>
+            <div class="neural-hub__agent-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+            </div>
+            <div class="neural-hub__agent-name">Watchdog Agent</div>
+            <p class="neural-hub__agent-desc">Post-migration monitoring with anomaly detection and auto-remediation.</p>
           </div>
         </div>
       </div>
     </div>
 
     <!-- ===================== Tech Stack ===================== -->
-    <div class="details-section">
+    <div class="details-section" id="arch-stack">
       <div class="container">
-        <hr class="divider--gradient">
+        <div class="section-connector">
+          <div class="section-connector__line"></div>
+          <div class="section-connector__dot"></div>
+          <div class="section-connector__line section-connector__line--bottom"></div>
+        </div>
         <div class="section__header reveal">
           <span class="badge badge--aws">Tech Stack</span>
           <h2 class="section__title">Layered Architecture</h2>
@@ -883,8 +1290,8 @@
               <span class="stack-layer__tag">Layer 2</span>
             </div>
             <div class="stack-layer__items">
-              <span class="stack-layer__item">Amazon Bedrock</span>
               <span class="stack-layer__item">Claude API</span>
+              <span class="stack-layer__item">Structured Prompt Chain</span>
               <span class="stack-layer__item">Shared Context Store</span>
               <span class="stack-layer__item">Contextual Reasoning Engine</span>
             </div>
@@ -910,7 +1317,11 @@
     <!-- ===================== Outputs ===================== -->
     <div class="details-section">
       <div class="container">
-        <hr class="divider--gradient">
+        <div class="section-connector">
+          <div class="section-connector__line"></div>
+          <div class="section-connector__dot"></div>
+          <div class="section-connector__line section-connector__line--bottom"></div>
+        </div>
         <div class="section__header reveal">
           <span class="badge badge--aws">Outputs</span>
           <h2 class="section__title">What RADCloud Generates</h2>
@@ -980,9 +1391,13 @@
     </div>
 
     <!-- ===================== Execution Timeline ===================== -->
-    <div class="details-section">
+    <div class="details-section" id="arch-sprint">
       <div class="container">
-        <hr class="divider--gradient">
+        <div class="section-connector">
+          <div class="section-connector__line"></div>
+          <div class="section-connector__dot"></div>
+          <div class="section-connector__line section-connector__line--bottom"></div>
+        </div>
         <div class="section__header reveal">
           <span class="badge badge--aws">24-Hour Sprint</span>
           <h2 class="section__title">From Architecture to Prototype in 24 Hours</h2>
@@ -993,7 +1408,7 @@
           <div class="sprint-step reveal">
             <div class="sprint-step__hours">Hours 1–6</div>
             <div class="sprint-step__title">Foundation</div>
-            <div class="sprint-step__desc">Stand up Amazon Bedrock / Claude API connections; build the core GCP Terraform/YAML parser.</div>
+            <div class="sprint-step__desc">Stand up Claude API connections; build the core GCP Terraform/YAML parser.</div>
           </div>
 
           <div class="sprint-step reveal">
@@ -1020,7 +1435,11 @@
     <!-- ===================== Team ===================== -->
     <div class="details-section">
       <div class="container">
-        <hr class="divider--gradient">
+        <div class="section-connector">
+          <div class="section-connector__line"></div>
+          <div class="section-connector__dot"></div>
+          <div class="section-connector__line section-connector__line--bottom"></div>
+        </div>
         <div class="section__header reveal">
           <span class="badge badge--aws">Team</span>
           <h2 class="section__title">The RADCloud Team</h2>
@@ -1120,7 +1539,7 @@
     </div>
   </footer>
 
-  <script src="js/main.js"></script>
+  <script src="js/main.js" defer></script>
   <script>
     window.addEventListener('load', function() {
       setTimeout(function() {
@@ -1170,16 +1589,16 @@
         { text: 'Fix:   ', cls: 'fn', after: ' Purchase 1yr AWS Reserved Instance' },
         { text: '' },
         { text: 'Before:', cls: 'fn', after: ' $1,690/mo (On-Demand)' },
-        { text: 'After: ', cls: 'fn', after: ' $1,170/mo (Reserved)' },
-        { text: 'Savings:', cls: 'fn', after: ' ', afterParts: [{text:'$520/mo ($6,240/yr)', cls:'num'}] },
+        { text: 'After: ', cls: 'fn', after: ' $466/mo (Reserved)' },
+        { text: 'Savings:', cls: 'fn', after: ' ', afterParts: [{text:'$1,224/mo ($14,688/yr)', cls:'num'}] },
         { text: '' },
         { text: 'Action:', cls: 'fn', after: ' Right-size compute' },
         { text: 'Target:', cls: 'fn', after: ' 9x m5.xlarge instances' },
         { text: 'Fix:   ', cls: 'fn', after: ' Downsize to m5.large' },
         { text: '' },
         { text: 'Before:', cls: 'fn', after: ' $2,950/mo' },
-        { text: 'After: ', cls: 'fn', after: ' $2,110/mo' },
-        { text: 'Savings:', cls: 'fn', after: ' ', afterParts: [{text:'$840/mo ($10,080/yr)', cls:'num'}] },
+        { text: 'After: ', cls: 'fn', after: ' $1,770/mo' },
+        { text: 'Savings:', cls: 'fn', after: ' ', afterParts: [{text:'$1,180/mo ($14,160/yr)', cls:'num'}] },
         { text: '' },
         { text: 'Status:', cls: 'fn', after: ' ', afterParts: [{text:'APPLIED ✓', cls:'str'}] }
       ];
